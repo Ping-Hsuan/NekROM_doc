@@ -1,7 +1,16 @@
 \section{\href{https://github.com/Nek5000/NekROM}{\color{blue}{NekROM}} - Model Order Reduction Framework for Nek5000}
-\noindent This package include tools to help apply model-order reduction (MOR) to data produced by \href{https://github.com/Nek5000/Nek5000}{\color{blue}{Nek5000}} to generate reduced-order models (ROM). The generated ROMs can be run either in the Fortran driver embedded inside the Nek5000 userchk subroutine or can be run separately by provided driver scripts in Matlab, Python, and Julia. Users can also provide their own drivers which read the ROM operators and QOI factors from the ops/ and qoi/ directories.
+\noindent 
+This package includes tools to apply model-order reduction (MOR) to data
+produced by \href{https://github.com/Nek5000/Nek5000}{\color{blue}{Nek5000}} to
+generate reduced-order models (ROMs). The generated ROMs can be run either with
+the Fortran driver embedded inside the Nek5000 userchk subroutine or can be run
+separately by driver scripts provided in Matlab, Python, and Julia. Users can
+also provide their own drivers which read the ROM operators and QOI factors
+from the ops/ and qoi/ directories.
 
 \subsection{Setup \& Procedure}
+
+\noindent
 Set shell variables (in .bashrc for BASH users):
 \begin{lstlisting}[language=bash]
 $ export MOR_DIR=`/path/to/NekROM`
@@ -25,18 +34,22 @@ Optional file:
 \begin{itemize}
 \item avg.list, contains list of paths to the average files
 \end{itemize}
-After ensuring the required files are in the case directory, run "makerom \$caserom" to make a Nek5000 executable for ROM.
+After ensuring the required files are in the case directory, run 
+``makerom \$caserom'' to make a Nek5000 executable for ROM.
+
+\newpage
 
 \subsection{Parameters}
 
-Compile-time parameters (for setting memory allocation size) can be found in LMOR.
+Compile-time parameters (for setting memory allocation size) can be found in
+LMOR.
 
 \begin{itemize}
 \item ls: maximum number of snapshots
 \item lb: maximum number of total modes
 \end{itemize}
 
-run-time parameters can be found in \$case.mor.
+Run-time parameters can be found in \$case.mor.
 \begin{itemize}
 \item $[\text{general}]$, header for general parameters
    \begin{itemize}
@@ -69,37 +82,48 @@ run-time parameters can be found in \$case.mor.
    \end{itemize}
 \end{itemize}
 
+\newpage
+
 \section{Example Cases}
-This section provides a collection of NekROM examples illustrating basic approaches and results. The examples here can be found in '\$MOR DIR/examples' directory.
+
+\noindent
+This section provides a collection of NekROM examples illustrating basic
+approaches and results. The examples here can be found in '\$MOR DIR/examples'
+directory.
 
 \subsubsection{Flow pass a cylinder}
-As a first example, we consider the problem of 2D flow past a cylinder. This is
-a canonical test case for ROMs because of its robust and low-dimensional
-attractor, which is manifest as a von Karman vortex street for $\rm Re = UD/\nu
->34.37$ \cite{ding2021flow}. The Reynolds number in our test case $\rm
-Re = 100$ and domain is $\Omega = [-2.5 : 17]D \times [-5 : 5]D$, with the
+
+\noindent
+As a first example, we consider the problem of 2D flow past a cylinder. 
+This is a canonical test case for ROMs because of its robust and
+low-dimensional attractor, which is manifest as a von Karman vortex street 
+for $\rm Re = UD/\nu
+>34.37$ \cite{ding2021flow}. The Reynolds number in our test case is $\rm
+Re = 100$ and the domain is 
+$\Omega = [-2.5 : 17]D \times [-5 : 5]D$, with a
 unit-diameter cylinder centered at $[0, 0]$.
 
-The reproduction results with ROM using $N=20$ at $\rm Re=100$ is shown in figures \ref{fig:1}--\ref{fig:2}
+The ROM reproduction results using $N=20$ modes at $\rm Re=100$ are shown in 
+Figures \ref{fig:1}--\ref{fig:2}.
 \begin{figure}[h]
      \centering
      \begin{subfigure}[b]{0.3\textwidth}
          \centering
-         \includegraphics[width=\textwidth]{anchor_1/visit0010}
+         \includegraphics[width=\textwidth]{cyl/fom}
          \caption{FOM}
          \label{fig:1_a}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.3\textwidth}
          \centering
-         \includegraphics[width=\textwidth]{anchor_1/visit0009}
+         \includegraphics[width=\textwidth]{cyl/rom}
          \caption{ROM with $N=20$}
          \label{fig:1_b}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.3\textwidth}
          \centering
-         \includegraphics[width=\textwidth]{anchor_1/visit0011}
+         \includegraphics[width=\textwidth]{cyl/err}
          \caption{Point-wise difference}
          \label{fig:1_c}
      \end{subfigure}
@@ -113,22 +137,22 @@ ROM with maximum difference $\approx 3e-3$.}
      \centering
      \begin{subfigure}[b]{0.3\textwidth}
          \centering
-         \includegraphics[width=\textwidth]{anchor_1/visit0013}
+         \includegraphics[width=\textwidth]{cyl/fom_avg}
          \caption{FOM}
          \label{fig:2_a}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.3\textwidth}
          \centering
-         \includegraphics[width=\textwidth]{anchor_1/visit0012}
+         \includegraphics[width=\textwidth]{cyl/rom_avg}
          \caption{ROM with $N=20$}
          \label{fig:2_b}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.3\textwidth}
          \centering
-         \includegraphics[width=\textwidth]{anchor_1/visit0014}
-         \caption{Point-wise difference, $u=1$}
+         \includegraphics[width=\textwidth]{cyl/err_avg}
+         \caption{Point-wise difference}
          \label{fig:2_c}
      \end{subfigure} 
      \caption{Reconstruction results with ROM with $N=20$ at $\rm Re=100$.
@@ -139,16 +163,18 @@ maximum difference $\approx 1.5e-5$.}
 \end{figure}
 
 \subsection{Kovasznay Solution}
-Kovasznay gives an analytical solution to the steady-state Navier-Stokes
-equations that is similar to the two-dimensional flow-field behind a periodic
-array of cylinders,
+
+\noindent
+Kovasznay \cite{kov48} gives an analytical solution to the steady-state
+Navier-Stokes equations that is similar to the two-dimensional flow-field
+behind a periodic array of cylinders,
 \begin{align}
    u_x = 1-e^{\lambda x} \cos(2 \pi y), \quad u_y = \frac{\lambda}{2\pi}
    e^{\lambda x} \sin(2 \pi y),
 \end{align}
 where $\lambda \coloneqq \rm Re/2 - \sqrt{\rm Re^2/4 + 4\pi^2}$. 
 
-The reproduction results with ROM at $\rm Re=40$ is shown in figure \ref{fig:3}.
+The ROM reproduction results at $\rm Re=40$ are shown in Figure \ref{fig:3}.
 \begin{figure}[!h]
      \centering
      \begin{subfigure}[b]{0.3\textwidth}
@@ -169,22 +195,25 @@ The reproduction results with ROM at $\rm Re=40$ is shown in figure \ref{fig:3}.
          \caption{Point-wise difference}
          \label{fig:3_c}
      \end{subfigure}
-     \caption{Reconstruction results with ROM at $\rm Re=40$.} \label{fig:3}
+     \caption{ROM reproduction results for the Kovasznay flow \cite{kov48} 
+at $\rm Re=40$.} \label{fig:3}
 \end{figure}
 
 \subsection{Convection in 2D Annulus}
+
+\noindent
 We consider a natural convection between the two concentric cylinders as
-considered by Grigull \& Hauf and presented by Van Dyke. The inner cylinder
-(diameter $D$) is slightly heated with with respect to the outer one (diameter
-$3D$). The Boussinesq approximation is used to formulate the equations of
-motion, valid in situations where density differences are small enough to be
-neglected everywhere except in the gravitational forcing.  
-Normalizing the Navier-Stokes and energy equations with $D$ for the length
-scale and $D/U$ for the time scale ($U \approx \sqrt{\alpha g D (T_1-T_0)}$) is
-the characteristic velocity in the given problem), and introducing
-nondimensional temperature $\theta=(T-T_0)/(T_1-T_0)$, where $T_0$ and $T_1$
-are the respective temperatures of the outer and inner cylinders, the governing
-equations take the nondimensional form
+considered by Grigull \& Hauf \cite{grigull66} and presented by Van Dyke
+\cite{vandyke82}. The inner cylinder (diameter $D$) is slightly heated with
+with respect to the outer one (diameter $3D$). The Boussinesq approximation is
+used to formulate the equations of motion, valid in situations where density
+differences are small enough to be neglected everywhere except in the
+gravitational forcing.  Normalizing the Navier-Stokes and energy equations with
+$D$ for the length scale and $D/U$ for the time scale ($U \approx \sqrt{\alpha
+g D (T_1-T_0)}$) is the characteristic velocity in the given problem), and
+introducing nondimensional temperature $\theta=(T-T_0)/(T_1-T_0)$, where $T_0$
+and $T_1$ are the respective temperatures of the outer and inner cylinders, the
+governing equations take the nondimensional form
 \begin{align}
    \pp{\bu}{t} + \bu \cdot \nabla \bu & = -\nabla p + \frac{1}{\sqrt{Gr}}
 \nabla^2 \bu + \theta, \quad \nabla \bu = 0, \\ \pp{\theta}{t} + \bu \cdot
@@ -199,7 +228,10 @@ temperature.  The Grashof and Prandtl numbers are defined as
 where $\nu$ is the kinematic viscosity, $\alpha$ is the volumetric thermal
 expansion coefficient, and $g$ is the acceleration due to gravity. 
 
-The reproduction results with ROM at $\rm Gr=700000$ is shown in figure \ref{fig:4}.
+The ROM reproduction results at $\rm Gr=700000$ are shown in Figure
+\ref{fig:4}.
+The pMOR results with one to three anchor points are shown in Figure
+
 \begin{figure}[!h]
      \centering
      \begin{subfigure}[b]{0.3\textwidth}
@@ -220,22 +252,22 @@ The reproduction results with ROM at $\rm Gr=700000$ is shown in figure \ref{fig
          \caption{Point-wise difference}
          \label{fig:4_c}
      \end{subfigure}
-     \caption{Reconstruction results with ROM at $\rm Gr=700000$.} \label{fig:4}
+     \caption{ROM reproduction results for the annulus flow at $\rm
+Gr=700000$.} \label{fig:4}
 \end{figure}
 
-The pMOR results with one to three anchor points are shown in figure \ref{fig:5}.
-\begin{figure}[h]
+\ref{fig:5}.  \begin{figure}[h]
      \centering
      \begin{subfigure}[b]{0.45\textwidth}
          \centering
-         \includegraphics[width=\textwidth]{/Users/bigticket0501/NekMOR_cases/annulus_2d/pmor/err_gr}
+         \includegraphics[width=\textwidth]{ann/err_gr}
          \caption{}
          \label{fig:3_a}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.45\textwidth}
          \centering
-         \includegraphics[width=\textwidth]{/Users/bigticket0501/NekMOR_cases/annulus_2d/pmor/nu_gr}
+         \includegraphics[width=\textwidth]{ann/nu_gr}
          \caption{}
          \label{fig:3_b}
      \end{subfigure}
@@ -245,14 +277,45 @@ The pMOR results with one to three anchor points are shown in figure \ref{fig:5}
      the FOM values.} \label{fig:5}
 \end{figure}
 
-\begin{table}[]
+\subsection{Orr-Sommerfeld problem}
+We consider the evolution of small amplitude disturbances in channel flow \cite{rai1991direct,malik1985spectral}.
+In this study the disturbance is taken to be an eigensolution of the
+Orr-Sommerfeld equation. The advantage of using this problem as a test case is
+that it has known solutions from linear theory.  The geometry consists of two
+walls separated by a distance $2h$ with periodic boundary conditions in the
+streamwise direction at $x = 0$ and $x = 2\pi$. The initial condition is
+\begin{align}
+   u^0(x,y) &= 1-(\frac{y}{h})^2 + \epsilon \hat{u} \\ 
+   v^0(x,y) &= \epsilon \hat{v},
+\end{align}
+where $(\hat{u}, \hat{v})$ corresponds to the only unstable eigensolution (wave number unity) of the
+Orr-Sommerfeld equation. The Reynolds number is $Re = U_c h / \nu =  7500$, based upon the
+centerline velocity, $U_c = 1$. A constant body force is applied to sustain the mean flow.
+The perturbation velocity is normalized to $|\hat{u}| = 1$ and $\epsilon$ is set to $.00001$.
+
+According to the linear theory, the energy of the perturbation:
+\begin{equation}
+   E(t) = \int^{2\pi}_0 \int^1_{-1} \{ (1-y^2-u)^2 + v^2 \} ~dy~dx
+\end{equation}
+should grow as $e^{2\omega_i t}$, where $\omega_i = .002234976$. Following \cite{malik1985spectral},
+we take as a measure of error the quantity: $error(t) = e^{2\omega_i t} - E(t_i)/E(0)$, where $E(t)$ is derived from 
+the FOM and ROM solution at time $t=200$. In addition, we compute the error
+in the growth rate at time $t = 200$ according to
+\begin{equation}
+   error_g = \frac{1}{\omega_i} \left|\omega_i - \frac{1}{2\Delta t}\ln \left(\frac{E(200)}{E(200-\Delta t)}\right) \right|
+\end{equation}
+
+Table \ref{table:1} shows the $error$ and $error_g$ for both FOM and ROM at $t=200$. The error in the growth rate is pretty good comparing to the result in FOM.
+
+\begin{table}[h]
+\caption{$error$ and $error_g$ for both FOM and ROM at $t=200$.}
 \resizebox{\columnwidth}{!}{%
-\begin{tabular}{|c|c|l|l|l|l|l|l|l|}
+\begin{tabular}{|c|l|l|l|l|l|}
 \hline
-   \multicolumn{1}{|r|}{} & time & istep & current growth rate & total energy growth& $\frac{E(t)}{E(0)}$    & $e^{(2 \omega_i t)}$ & $e^{(2 \omega_i t)}-\frac{E(t)}{E(0)}$ & \begin{tabular}[c]{@{}l@{}}error\\ in the growth rate\end{tabular} \\ \hline
-FOM                    & 200  & 10000 & 2.23368536E-03      & 2.23371912E-03  & 2.44363736 & 2.44486586       & -1.22850700E-03                & 5.77317855E-04                                                     \\ \hline
-ROM                    & 200  & 10000 & 2.24312097E-03      & 2.24312098E-03  & 2.45284455 & 2.44486586       & 7.97868317E-03                 & 3.64447902E-03                                                     \\ \hline
-ROM without forcing    & 200  & 10000 & 2.32059287E-03      & 2.34185537E-03  & 2.55165495 & 2.44486586       & 1.06789083E-01                 & 3.83078984E-02                                                     \\ \hline
+   \multicolumn{1}{|r|}{} & $t$ &  $\frac{E(t)}{E(0)}$    & $e^{(2 \omega_i t)}$ & $e^{(2 \omega_i t)}-\frac{E(t)}{E(0)}$ & \begin{tabular}[c]{@{}l@{}} $error_g$ \end{tabular} \\ \hline
+FOM                    & 200  &  2.44363736 & 2.44486586       & -1.22850700E-03                & 5.77317855E-04                                                     \\ \hline
+ROM                    & 200  &  2.45284455 & 2.44486586       & 7.97868317E-03                 & 3.64447902E-03                                                     \\ \hline
 \end{tabular}
-   }
+}
+\label{table:1}
 \end{table}
