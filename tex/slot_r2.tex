@@ -1,0 +1,133 @@
+\graphicspath{{/Users/bigticket0501/MOR_cases/trombe_wall/slot_r2/}}
+
+\begin{figure}[H] \centering 
+   \subfloat[$Ra=2.6e7$]
+   {\includegraphics[scale=0.3]{snapshots/ra26000000/ene_his}}
+   \hspace{1.5em}
+   \subfloat[$Ra=2.7e7$]
+   {\includegraphics[scale=0.3]{snapshots/ra27000000/ene_his}}
+   \hspace{1.5em}
+   \subfloat[$Ra=2.8e7$]
+   {\includegraphics[scale=0.3]{snapshots/ra28000000/ene_his}}\\
+   \subfloat[$Ra=2.9e7$]
+   {\includegraphics[scale=0.3]{snapshots/ra29000000/ene_his}}
+   \hspace{1.5em}
+   \subfloat[$Ra=3e7$]
+   {\includegraphics[scale=0.3]{snapshots/ra30000000/ene_his}}
+   \caption{Energy history of FOM at $Pr=0.1$ with different $Ra$.}
+\label{fig:slotr2_ene} \end{figure}
+
+\begin{figure}[H] \centering 
+   \subfloat[$Ra=2.6e7$]
+   {\includegraphics[scale=0.3]{snapshots/ra26000000/nus_his}}
+   \hspace{1.5em}
+   \subfloat[$Ra=2.7e7$]
+   {\includegraphics[scale=0.3]{snapshots/ra27000000/nus_his}}
+   \hspace{1.5em}
+   \subfloat[$Ra=2.8e7$]
+   {\includegraphics[scale=0.3]{snapshots/ra28000000/nus_his}}\\
+   \subfloat[$Ra=2.9e7$]
+   {\includegraphics[scale=0.3]{snapshots/ra29000000/nus_his}}
+   \hspace{1.5em}
+   \subfloat[$Ra=3e7$]
+   {\includegraphics[scale=0.3]{snapshots/ra30000000/nus_his}}
+   \caption{Nusselt number history of FOM at $Pr=0.1$ with different $Ra$.}
+\label{fig:slotr2_nus} \end{figure}
+
+\begin{figure}[H] \centering 
+   \subfloat[Mean Nu]
+   {\includegraphics[scale=0.45]{snapshots/mnus_wparam_3001_3500}}
+   \hspace{1.5em}
+   \subfloat[Std(Nu)]
+   {\includegraphics[scale=0.45]{snapshots/stdnus_wparam_3001_3500}}
+   \caption{First and second moment of FOM Nu at $Pr=0.1$ with different $Ra$.}
+\label{fig:slotr2_1st_2nd_nus} \end{figure}
+
+We find that the mean Nu does not vary alot with $Ra$.
+
+\subsection{Reproduction Problem}
+In the following, we show the relative $H^1$ error in the mean
+flow prediction, predicted $\langle \text{TKE} \rangle_g$, and
+the dual norm of the residual with $N$ for $Ra=2.6e7$.
+\begin{figure}[H] \centering 
+   \subfloat[Relative error in mean Nu]
+   {\includegraphics[scale=0.45]{Ra2.6e7/g-rom_reproduction_theta_90_Ra_26000000/nu/mnuserr}}
+   \hspace{1.5em}
+   \subfloat[Std(Nu)]
+   {\includegraphics[scale=0.45]{Ra2.6e7/g-rom_reproduction_theta_90_Ra_26000000/nu/stdnu}}\\
+   \subfloat[Relative $H^1$ error in mean flow]
+   {\includegraphics[scale=0.45]{Ra2.6e7/g-rom_reproduction_theta_90_Ra_26000000/mrelerr_h1/mrelerr_h1_rom}}
+   \hspace{1.5em}
+   \subfloat[Dual norm of the discrete time-averaged residual]
+   {\includegraphics[scale=0.45]{Ra2.6e7/g-rom_reproduction_theta_90_Ra_26000000/dual_norm/dual_norm}}\\
+   \subfloat[Mean TKE]
+   {\includegraphics[scale=0.45]{Ra2.6e7/g-rom_reproduction_theta_90_Ra_26000000/mtke/mtke}}
+   \hspace{1.5em}
+   \subfloat[Mean temperature fluctuation]
+   {\includegraphics[scale=0.45]{Ra2.6e7/g-rom_reproduction_theta_90_Ra_26000000/mtfluc/mtfluc}}
+\caption{The solution reproduction problem at $Ra=2.6e7$;
+   POD-Galerkin. Figure (a): behavior of the relative $H^1$
+   error in mean flow prediction with $N$.  Figure (b):
+   behavior of the dual norm of the discrete time-averaged
+   residual with $N$.
+   Figure (c): TKE prediction $\langle \text{TKE} \rangle_g$
+   vs. truth estimate for multiple values of $N$.
+   Figure (d): Mean temperature fluctuation $\langle T_{fluc}
+   \rangle_g$ vs. truth estimate for multiple values of $N$.}
+\label{fig:slotr2_ra2.6e7_qois} \end{figure}
+
+\begin{figure}[H] \centering 
+   \subfloat[Relative error in mean Nu]
+   {\includegraphics[scale=0.45]{Ra3e7/g-rom_reproduction_theta_90_Ra_30000000/nu/mnuserr}}
+   \hspace{1.5em}
+   \subfloat[Std(Nu)]
+   {\includegraphics[scale=0.45]{Ra3e7/g-rom_reproduction_theta_90_Ra_30000000/nu/stdnu}}\\
+   \subfloat[Relative $H^1$ error in mean flow]
+   {\includegraphics[scale=0.45]{Ra3e7/g-rom_reproduction_theta_90_Ra_30000000/mrelerr_h1/mrelerr_h1_rom}}
+   \hspace{1.5em}
+   \subfloat[Dual norm of the discrete time-averaged residual]
+   {\includegraphics[scale=0.45]{Ra3e7/g-rom_reproduction_theta_90_Ra_30000000/dual_norm/dual_norm}}\\
+   \subfloat[Mean TKE]
+   {\includegraphics[scale=0.45]{Ra3e7/g-rom_reproduction_theta_90_Ra_30000000/mtke/mtke}}
+   \hspace{1.5em}
+   \subfloat[Mean temperature fluctuation]
+   {\includegraphics[scale=0.45]{Ra3e7/g-rom_reproduction_theta_90_Ra_30000000/mtfluc/mtfluc}}
+\caption{The solution reproduction problem at $Ra=3e7$;
+   POD-Galerkin. Figure (a): behavior of the relative $H^1$
+   error in mean flow prediction with $N$.  Figure (b):
+   behavior of the dual norm of the discrete time-averaged
+   residual with $N$.
+   Figure (c): TKE prediction $\langle \text{TKE} \rangle_g$
+   vs. truth estimate for multiple values of $N$.
+   Figure (d): Mean temperature fluctuation $\langle T_{fluc}
+   \rangle_g$ vs. truth estimate for multiple values of $N$.}
+\label{fig:slotr2_ra3e7_qois} \end{figure}
+
+\subsection{Parametric Problem} In the following, we show the
+relative $H^1$ error in the mean flow prediction, predicted
+$\langle \text{TKE} \rangle_g$, and the dual norm of the
+residual with $Ra$ with anchor point $Ra^*= 2.6e7$.
+\begin{figure}[H] \centering 
+   \subfloat[Mean Nu]
+   {\includegraphics[scale=0.3]{Ra2.6e7/g-rom_parameter_theta90_Ra26000000/nu/mnu_N100}}
+   \hspace{1.5em}
+   \subfloat[Relative error in mean Nu]
+   {\includegraphics[scale=0.3]{Ra2.6e7/g-rom_parameter_theta90_Ra26000000/nu/mnurelerr_N100}}
+   \hspace{1.5em}
+   \subfloat[Std(Nu)]
+   {\includegraphics[scale=0.3]{Ra2.6e7/g-rom_parameter_theta90_Ra26000000/nu/std_nu_N100}}\\
+   \subfloat[Relative $H^1$ error in mean flow]
+   {\includegraphics[scale=0.45]{Ra2.6e7/g-rom_parameter_theta90_Ra26000000/mrelerr_h1/mrelerr_N100}}
+   \hspace{1.5em}
+   \subfloat[Dual norm of the discrete time-averaged residual]
+   {\includegraphics[scale=0.45]{Ra2.6e7/g-rom_parameter_theta90_Ra26000000/dual_norm/dual_norm_N100}}
+\caption{The solution reproduction problem at $Ra=2.6e7$;
+   POD-Galerkin. Figure (a): behavior of the relative $H^1$
+   error in mean flow prediction with $N$.  Figure (b):
+   behavior of the dual norm of the discrete time-averaged
+   residual with $N$.
+   Figure (c): TKE prediction $\langle \text{TKE} \rangle_g$
+   vs. truth estimate for multiple values of $N$.
+   Figure (d): Mean temperature fluctuation $\langle T_{fluc}
+   \rangle_g$ vs. truth estimate for multiple values of $N$.}
+\label{fig:slotr2_ra2.6e7_qois_pmor} \end{figure}

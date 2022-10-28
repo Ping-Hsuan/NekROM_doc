@@ -1,0 +1,94 @@
+% You should title the file with a .tex extension (hw1.tex, for example)
+\documentclass[11pt]{article}
+\usepackage{layout}
+\usepackage{printlen}
+\usepackage{mathtools} % for coloneqq
+\usepackage{hyperref}
+\usepackage{amsmath,bm}
+\usepackage{subcaption}
+\usepackage{bbm}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{forest}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{animate}
+\usepackage{datetime}
+\usepackage{comment}
+\usepackage{systeme}
+\usepackage{indentfirst}
+\usepackage{makecell} % enable break line inside table for long text
+\usepackage{listings}
+\lstset{
+  literate={~} {$\sim$}{1},
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  frame=single,
+  breaklines=true,
+  keepspaces=true,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+}
+\captionsetup[subfigure]{labelformat = parens, labelsep = space, font = small}
+\usepackage{tikz}
+\usetikzlibrary{trees}
+
+\oddsidemargin0cm
+\topmargin-2cm     %I recommend adding these three lines to increase the 
+\textwidth16.5cm   %amount of usable space on the page (and save trees)
+\textheight23.5cm  
+
+\newcommand{\question}[2] {\vspace{.25in} \hrule\vspace{0.5em}
+\noindent{\bf #1: #2} \vspace{0.5em}
+\hrule \vspace{.10in}}
+\renewcommand{\part}[1] {\vspace{.10in} {\bf (#1)}}
+
+% \newcommand{\myname}{Ping-Hsuan Tsai}
+% \newcommand{\myandrew}{pht2@illinois.edu}
+% \newcommand{\myhwnum}{02}
+\newcommand{\myname}{~}
+\newcommand{\myandrew}{~}
+\newcommand{\myhwnum}{~}
+
+% command or package for scientific notation
+\newcommand{\expnumber}[2]{{#1}\mathrm{e}{#2}}
+\usepackage{siunitx}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 1pt}
+ 
+\pagestyle{fancyplain}
+\lhead{\fancyplain{}{}}      % Note the different brackets!
+\rhead{\fancyplain{}{\myname\\ \myandrew}}
+\chead{\fancyplain{}{NekROM Report}}
+
+\input ./pf
+\graphicspath{{figs/}}
+
+
+\begin{document}
+\setlength{\parindent}{0.25in}
+
+\medskip                        % Skip a "medium" amount of space
+                                % (latex determines what medium is)
+                                % Also try: \bigskip, \littleskip
+
+\thispagestyle{plain}
+\begin{center}                  % Center the following lines
+   \textbf{\Large NekROM Report}
+   \\[2ex]
+Ping-Hsuan Tsai,\footnote{Dept. of Computer Science, University of Illinois, Urbana-Champaign}
+pht2@illinois.edu \\
+\today
+\end{center}
+
+\input ./tex/introduction
+%\input ./tex/quick
+%\input ./tex/examples
+
+\nocite{*}
+\bibliographystyle{unsrt}
+\bibliography{nekmor}
+
+\end{document}

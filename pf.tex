@@ -1,0 +1,250 @@
+%begin      p. fischer
+\def\tbu{{\bf{\tilde u}}}
+\def\tT{{\tilde T}}
+\def\bg{{\bf g}}
+\def\ds{\displaystyle}
+\def\d{\partial}
+\def\dO{\partial \Omega}
+\def\dOt{\tilde {\partial \Omega}}
+\def\spn{ {\textstyle span} \{ }
+\def\ee{{\hat {\underline e}}}
+\def\uxh{{\hat {\underline x}}}
+\def\uuh{{\hat {\underline u}}}
+\def\eq{ \; = \; }
+%\def\eqq{ \, \equiv \, }
+\def\eqq{ \, := \, }
+% \def\es{ \, = \, }
+\def\es{ = }
+\def\ea{ \; & = & \; }
+\def\sp{ \; + \; }
+\def\sm{ \; - \; }
+\def\ds{ \Delta s }
+\def\dt{ \Delta t }
+\def\dx{ \Delta x }
+\def\XX{\raisebox{0.3ex}{$\chi$}}
+% mathcal command
+\def\cbH{{\mathcal{\bf  H}}}
+\def\cbV{{\mathcal{\bf  V}}}
+\def\cW{{\mathcal{W}}}
+\def\cL{{\mathcal{L}}}
+\def\cB{{\mathcal{B}}}
+\def\cH{{\mathcal{H}}}
+\def\cI{{\mathcal{I}}}
+\def\cM{{\mathcal{M}}}
+\def\cN{{\mathcal{N}}}
+\def\cP{{\mathcal{P}}}
+\def\cNb{{\bar {\mathcal{N}}}}
+\def\cR{{\mathcal{R}}}
+
+\def\bN{{\bar N}}
+\def\No{{N_o}}
+\def\scriptO{{{\it O}\kern -.42em {\it `}\kern + .20em}}
+\def\RR{{{\rm l}\kern - .15em {\rm R} }}
+\def\PP{{{\rm l}\kern - .15em {\rm P} }}
+\def\VV{{{\rm V}\kern - .69em {\rm V} }}
+%\def\L2{{{\cal L}^2}}
+%\def\H1{{{\cal H}^1}}
+%\def\L2{{{\bf L}^2}}
+%\def\H1{{{\bf H}^1}}
+\def\L2{{{\sf L}^2}}
+\def\H1{{{\sf H}^1}}
+\def\PN2{{\PP_{N}-\PP_{N-2}}}
+\def\QM2{{\mathcal{Q}_{M}-\mathcal{Q}_{M-2}}}
+\def\PNK{{\PP_{N,K}(\Omega)}}
+\def\complex{{{\rm C} \kern - .53em {\rm l} \kern + .38em}}
+\def\eop{\hbox{\vrule width 6pt height 6pt depth 0pt}}
+
+\def\am{{ | \lambda_{\max} |}}
+\def\a1{{ | \lambda_{\min} |}}
+\def\lm{{   \lambda_{\max}  }}
+\def\l1{{   \lambda_{\min}  }}
+\def\bhu{{\hat   {\bf u}}}
+
+\def\bff{{\bf f}}
+\def\tp {{\tilde p}}
+\def\btu{{\tilde {\bf u}}}
+\def\utU{{\underline {\tilde {\bf u}}}}
+\def\uU{{{\underline {\bf u}}}}
+\def\bhu{{\hat   {\bf u}}}
+\def\bhn{{\hat   {\bf n}}}
+\def\bnh{{\hat   {\bf n}}}
+\def\ugt{{\tilde {\underline g}}}
+\def\uut{{\tilde {\underline u}}}
+\def\uxt{{\tilde {\underline x}}}
+\def\ubt{{\tilde {\underline b}}}
+\def\bue{{\underline {\bf e}}}
+\def\bur{{\underline {\bf r}}}
+\def\bu0{{\underline {\bf 0}}}
+\def\buu{{\underline {\bf u}}}
+\def\bue{{\underline {\bf e}}}
+\def\buf{{\underline {\bf f}}}
+\def\br{{\bf r}}
+\def\bz{{\bf z}}
+\def\bu{{\bf u}}
+\def\be{{\bf e}}
+\def\bw{{\bf w}}
+\def\bv{{\bf v}}
+\def\bx{{\bf x}}
+\def\by{{\bf y}}
+\def\bg{{\bf g}}
+\def\bs{{\bf s}}
+\def\bxt{{\tilde {\bf x}}}
+\def\bA{{\bf A}}
+\def\bB{{\bf B}}
+\def\bC{{\bf C}}
+\def\bD{{\bf D}}
+\def\bE{{\bf E}}
+\def\bG{{\bf G}}
+\def\bH{{\bf H}}
+\def\bI{{\bf I}}
+\def\bJ{{\bf J}}
+\def\bM{{\bf M}}
+\def\bQ{{\bf Q}}
+\def\bF{{\bf F}}
+\def\bJ{{\bf J}}
+\def\bE{{\bf E}}
+\def\bL{{\bf L}}
+\def\bP{{\bf P}}
+\def\bX{{\bf X}}
+\def\bc{{\bf c}}
+\def\bn{{\bf n}}
+
+\def\bEu{{\underline {\bf E}}}
+\def\bHu{{\underline {\bf H}}}
+
+\def\At{{\tilde A}}
+\def\Bt{{\tilde B}}
+\def\Bb{{\bar B}}
+\def\Dt{{\tilde D}}
+\def\It{{\tilde I}}
+\def\Ut{{\tilde U}}
+\def\xt{{\tilde x}}
+\def\yt{{\tilde y}}
+\def\zt{{\tilde z}}
+\def\Tt{{\tilde T}}
+
+\def\Ah{{\hat A}}
+\def\Fh{{\hat F}}
+\def\ih{{\hat \imath}}
+\def\jh{{\hat \jmath}}
+\def\Bh{{\hat B}}
+\def\Dh{{\hat D}}
+\def\Ih{{\hat I}}
+\def\Eh{{\hat E}}
+\def\Oh{{\hat \Omega}}
+\def\Ot{{\tilde \Omega}}
+\def\Ok{{\Omega^k}}
+\def\Rh{{\hat R}}
+\def\hu{{\hat u}}
+\def\hv{{\hat v}}
+
+\def\ua{{\underline a}}
+\def\ub{{\underline b}}
+\def\uc{{\underline c}}
+\def\ud{{\underline d}}
+\def\ue{{\underline e}}
+\def\uf{{\underline f}}
+\def\ug{{\underline g}}
+\def\uh{{\underline h}}
+\def\ui{{\underline i}}
+\def\uj{{\underline j}}
+\def\uk{{\underline k}}
+\def\ul{{\underline l}}
+\def\um{{\underline m}}
+\def\un{{\underline n}}
+\def\uo{{\underline o}}
+\def\up{{\underline p}}
+\def\uq{{\underline q}}
+\def\ur{{\underline r}}
+\def\us{{\underline s}}
+\def\uS{{\underline S}}
+\def\ut{{\underline t}}
+\def\uu{{\underline u}}
+\def\uT{{\underline T}}
+\def\uQ{{\underline Q}}
+\def\uv{{\underline v}}
+\def\uw{{\underline w}}
+\def\ux{{\underline x}}
+\def\vx{{\vec x}}
+\def\uy{{\underline y}}
+\def\uz{{\underline z}}
+\def\u0{{\underline 0}}
+
+\def\uxb{{\bar {\underline x}}}
+
+
+\def\inn{ {\textstyle \;  \; {\rm in} \;  }}
+\def\onn{ {\textstyle \;  \; {\rm on} \;  }}
+\def\for{ {\textstyle \;  \; {\rm for} \;  }}
+
+
+\newcommand{\pp}[2]{\frac{\partial #1}{\partial #2} }
+\newcommand{\dd}[2]{\frac{d #1}{d #2} }
+\def\bubar{{\bar {\bf u}}}
+
+\def\bU{{\bf U}}
+\def\bX{{\bf X}}
+\def\bZ{{\bf Z}}
+\def\bbZ{\bar {\bf Z}}
+\def\bT{{\bf T}}
+\def\bzeta{{\bm \zeta}}
+\def\uzeta{{\bf{\underline \zeta}}}
+\def\ubzeta{\underline{{\bf \zeta}}}
+\def\utheta{{\bf{\underline \theta}}}
+\def\utau{{\bf{\underline \tau}}}
+\def\tbu{{\bf{\tilde u}}}
+\def\tT{{\tilde T}}
+\def\tc{{\tilde c}}
+\def\uft{{\tilde {\underline f}}}
+
+\def\hatr{{\hat {r}}}
+\def\hats{{\hat {s}}}
+\def\hatt{{\hat {t}}}
+\def\rhoh{{\hat {\rho}}}
+\def\rhot{{\tilde {\rho}}}
+
+\def\uTb{{\overline {\underline T}}}
+\def\uxb{{\bar {\underline x}}}
+\def\uub{{\bar {\underline u}}}
+\def\uvb{{\bar {\underline v}}}
+\def\ubv{{\bar {\underline v}}}
+\def\ubu{{\overline{\underline u}}}
+\def\ufb{{\bar {\underline f}}}
+\def\ubb{{\bar {\underline b}}}
+\def\vbar{{\bar v}}
+\def\ubar{{\bar u}}
+\def\bubar{{\bar {\bf u}}}
+
+
+
+%end        p. fischer
+\def\ubU{{\underline {\bar{\bf u}}}}
+\def\bbu{{\overline{\bf u}}}
+\def\ubbu{\underline{\overline{\bf u}}}
+\def\ubu{{\underline{\overline{u}}}}
+\def\huu{{\hat{\underline{u}}}}
+\def\bT{{\overline{T}}}
+\def\ubT{{\underline{\overline{T}}}}
+\def\huT{{\hat{\underline{T}}}}
+
+\def\Nu{\text{Nu}}
+\def\tc{\text{c}}
+\def\tt{\text{t}}
+\def\tdiv{\text{div}}
+
+\def\uavg{\langle \bu \rangle}
+\def\Tavg{\langle T \rangle}
+\def\Nuavg{\langle \Nu \rangle}
+
+% RANS notation
+\def\op{\overline{p}}
+\def\obuup{\overline{\bu'\bu'}}
+\def\obU{\overline{\bU}}
+\def\bUu{\underline{\bU}}
+\def\bUou{\overline{\underline{\bU}}}
+\def\Uu{\underline{U}}
+\def\Uou{\overline{\underline{U}}}
+\def\edou{\overline{\underline{\nu_t}}}
+\def\huU{{\hat{\underline{U}}}}
+% \bm requires bm package
+\def\btau{\bm{\tau}}

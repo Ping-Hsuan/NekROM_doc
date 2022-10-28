@@ -1,0 +1,358 @@
+\section{Reynolds-averaged Navier-Stokes equations (RANS)}
+%
+\begin{align}
+   \rho \left(\pp{\bU}{t} + \bU \cdot \nabla \bU\right) & = - \nabla \op + \nabla
+\cdot \left(\mu (\nabla \bU + (\nabla \bU)^T) + \btau \right), \label{eq:amom}\\
+   \nabla \cdot \bU & = 0, \label{eq:acont} \\ 
+   \pp{T}{t} + \bU \cdot \nabla T & =  \nabla
+\cdot \left(\alpha \nabla T + \mathbf{H}^R \right), \label{eq:aene}
+\end{align}
+%
+where $\btau=-\rho\obuup$ is the Reynolds stress and $\mathbf{H}^R =
+-\overline{\bu'T'}$ is the turbulent heat flux.
+Eqs.~(\ref{eq:amom}--\ref{eq:aene}) have five unkowns and we close the RANS
+equations by modeling the Reynolds stress $\btau$ and turbulent heat flux $\mathbf{H}^R$.
+
+In this work, we follow the Boussinesq hypothesis to model the Reynolds stress
+with the eddy viscosity $\nu_t$,
+%
+\begin{align}
+   - (\obuup) = \nu_t \left(\nabla \bU + (\nabla \bU)^T \right) -
+\frac{2}{3} k \mathbf{I}, \label{eq:evm}
+\end{align}
+%
+where $2/3 k \mathbf{I}$ is to ensure the correct sum of normal stresses.
+\footnote{\begin{equation} \rho
+(\overline{(u')^2}+\overline{(v')^2}+\overline{(w')^2}) = -2\rho k.
+\end{equation}} 
+The eddy viscosity $\nu_t$ could either be a function of one
+($\tilde{\nu}$ in Spalart-Allmaras) or two variables ($k$ and $\epsilon$ or
+$\omega$).
+
+The simple gradient diffusion hypothesis (SDGH) 
+%
+\begin{equation}
+   \overline{\bu'T'} = -\frac{\nu_t}{\rm Pr_t}\nabla T, \label{eq:sdgh}
+\end{equation}
+%
+and the generalized gradient diffusion hypothesis (GGDH)\footnote{Make sure the
+operator form (\ref{eq:ggdh}) matches with the index form $ -C_s
+\overline{\bu'_j\bu'_k} \frac{k}{\epsilon} \pp{T}{x_k}$}
+%
+\begin{equation} 
+   \overline{\bu'T'} = -C_s \obuup \frac{k}{\epsilon} \nabla T,
+\label{eq:ggdh}
+\end{equation}
+%
+are the two hypothesis \cite{hsieh2004numerical} commonly used to model the
+turbulent heat flux.
+
+\section{Galerkin Formulation for the Full-Order Model (FOM)} \label{galerkin_fom}
+\noindent The FOM is based on the spectral element method (SEM) in the
+open-source code, Nek5000, and uses the $P_{q}$--$P_{q-2}$ velocity-pressure
+coupling \cite{maday1987well}, where the velocity is represented as a
+tensor-product Lagrange polynomial of degree $q$ in the reference element $\Oh
+:= [-1,1]^2$ while the pressure is of degree $q-2$.  The solution in $\Omega =
+\bigcup_e \Omega^e$ consists of local representations of $\bu$, $p$, and $T$
+that are mapped from $\Oh$ to $\Omega^e$, $e=1,\dots,E$. 
+
+For any $\bu(\bx,t)$, we have a corresponding vector of basis coefficients
+$\buu = [\bu_1\dots \bu_{\cN}]^T$ such that 
+%
+\begin{equation} \label{eq:ui} 
+   \bu(\bx,t) = \sum_{j=1}^\cN \bu_j(t) \phi_j(\bx) \in \bX_0^\cN \subset
+   \cbH^1_0,
+\end{equation}
+%
+with $\phi_j(\bx)$ the underlying spectral element basis functions spanning the
+FOM approximation space, $\bX_0^\cN$.  Because the SEM is nodal-based, each
+$\bu_j(t)$ represents the two velocity components at grid point $\bx_j$ in the
+spectral element mesh at time $t$.  Similarly, the temperature is given by
+%
+\begin{equation} \label{eq:ti}
+    T(\bx,t) = \sum_{j=1}^\cNb T_j(t) \phi_j(\bx) \in X^{\cN}_0 \subset \cH^1_0.
+\end{equation}  Here, $\cH^1$ is the set of square-integrable
+%
+functions on $\Omega$ whose gradient is also square-integrable and $X^{\cN}
+\subset \cH^1$ is the finite dimensional SEM approximation space spanned by $\{
+   \phi_j(\bx) \}$. $\cH^1_0$ is the set of functions in $\cH^1$ that vanish
+wherever Dirichlet conditions associated with (\ref{eq:ade}) are applied on the
+domain boundary $\dO$ and $\cH^1_b$ is the set of functions in $\cH^1$ that
+satisfy the prescribed Dirichlet conditions for temperature.  Bold-face
+indicates that the space is spanned by vector-valued functions having $d$
+components ($d=2$ or $3$) and, in the case of $\bX_0^{\cN} \subset \cbH^1_0$,
+that the functions vanish where Dirichlet conditions are applied for
+(\ref{eq:PDE}).  The pressure $p$ is in $Y^{\cN} \subset \cL^2(\Omega)$, which
+is the space of piecewise continuous functions on $\Omega$ such that
+$\int_{\Omega} p^2 \, d\bx < \infty$.  For convenience, we denote $\bbZ^{\cN} =
+(\bX^{\cN},Y^{\cN},X^{\cN})$ as the collection of the relevant
+finite-dimensional spaces and will add a subscript $0$ or $b$ where required to
+explicitly indicate the imposed boundary conditions.
+
+Both the FOM and ROM are cast within the same Galerkin framework.  To begin, we
+introduce several inner products for elements in the FOM space, $\bbZ^{\cN}$.
+For any pair of scalar fields $(p,q) \in \cL^2(\Omega)$ and $d$-dimensional
+vector fields, $\bv(\bx) = [v_1(\bx)\, \dots \, v_d(\bx)]$, $\bu(\bx) =
+[u_1(\bx)\, \dots \, u_d(\bx)] $ whose components are also in $\cL^2$, let
+%
+\begin{equation} \label{eq:vari}
+   (q,p) \coloneqq \int_{\Omega} \, q \, p \, d\bx, \qquad
+   (\bv, \bu) \coloneqq \int_{\Omega} \, \left( v_1 u_1 + \cdots + v_d u_d
+   \right) \, d\bx.  
+\end{equation}
+%
+Further, for $S$, $T \in X^{\cN}$ and $\bv$, $\bu \in \bX^{\cN}$, let
+%
+\begin{align} \label{eq:vari2}
+   a(S,T) &\coloneqq \left(\nabla S , \nabla T \right), \qquad \hspace{0.28in}
+   a(\bv,\bu) \coloneqq \left(\nabla \bv , \nabla \bu \right), \\
+   c(S,\bu,T) &\coloneqq \left(S , \bu \cdot \nabla T \right), \qquad
+   c(\bv,\bu,\bw) \coloneqq \left(\bv , \bu \cdot \nabla \bw \right).
+\end{align}
+%
+For the FOM, we consider the (semi-discrete) weak form of (\ref{eq:PDE}),
+{\em Find $(\obU,~p,~\bT) \in \bbZ^{\cN}_b$ such that, for all
+$(\bv,~q,~S) \in \bbZ^{\cN}_0$,}
+%
+\begin{align} \label{eq:var1}
+   \left( \bv,\pp{\obU}{t} \right) + \nu \, a(\bv,\obU) +
+\textcolor{red}{(\nabla \bv, \nu_t \nabla \obU)} - \left(\nabla \cdot \bv , p
+\right) &= -c\left( \bv , \obU , \obU \right) + \left( \bv , \bg(\theta_g) \bT
+\right), 
+   \\[1.6ex] \label{eq:var2}
+   - \left(q, \nabla \cdot \obU  \right) \hspace{2.54in} &= 0,
+   \\[1.6ex] \label{eq:var3}
+   \left( S,\pp{\bT}{t} \right) + \alpha \, a(S,\bT) + \textcolor{red}{(\nabla
+S, \frac{\nu_t}{\rm Pr_t} \nabla \bT)} \hspace{0.75in} &= -c\left( S , \obU,
+\bT \right).
+\end{align}
+%
+Here, we have introduced $\obU = \bU + \bU_0(\bx)$ and $\bT = T + T_0(\bx)$ as
+functions that have been augmented by (potentially trivial) lifting functions,
+$\bU_0$ and $T_0$, which are functions of space only.   If these functions
+satisfy the (time-independent) boundary conditions, then one can account for
+inhomogeneous boundary conditions by moving them to the right-hand side.  In
+the case of the ROM, the lifting functions can also provide an initial
+approximation to the solution.  In the sequel, our principal unknowns will be
+$\bU$ and $T$.
+
+For temporal discretization of (\ref{eq:var1})--(\ref{eq:var3}), we use a
+semi-implicit scheme with $k$th-order backward differencing (BDF$k$) for the
+time derivative, implicit treatment of the positive-definite dissipation terms,
+and $k$th-order extrapolation (EXT$k$) of the advection and buoyancy terms.  We
+typically use $k=3$, to ensure that the imaginary eigenvalues associated with
+skew-symmetric advection operator are within the stability region of the
+BDF$k$/EXT$k$ time-stepper, as discussed in \cite{fischer2017recent}.  Denoting
+the solution at time $t^n = \dt \cdot n$ as $(\obU^n,p^n,\bT^n)$, the full
+discretization of the FOM reads {\em Find $(\bU^n,p^n,T^n) \in \bbZ^{\cN}_0$
+such that, for all $(\bv,q,S) \in \bbZ^{\cN}_0$,}
+%
+\begin{align} \label{eq:var1a}
+   \frac{\beta_0}{\dt} ( \bv,\bU^n ) + \nu \, a(\bv,\bU^n) - \left(\nabla \cdot
+   \bv , p^n \right) &= (\bv,\bff^n), \\[1.6ex] \label{eq:var2a} 
+   - \left(q, \nabla \cdot \bU^n  \right) \hspace{1.85in} &=
+   \left(q, \nabla \cdot \bU_0 \right), \\[1.6ex] \label{eq:var3a}
+   \frac{\beta_0}{\dt} \left( S,T^n \right) + \alpha \, a(S,T^n)
+   \hspace{0.93in} &=  (S,Q^n).
+\end{align}
+%
+Equations (\ref{eq:var1a})--(\ref{eq:var3a}) represent a linear unsteady
+Stokes plus unsteady heat equation to be solved at each time-step $t^n$.  The
+inhomogeneous terms comprise the BDF, advection, buoyancy and lifting terms,
+%
+\begin{align} \label{eq:rhs1a}
+   (\bv, \bff^n) &\coloneqq -\sum_{s=1}^k \, \left[ \frac{\beta_s}{\dt} (
+\bv,\bU^{n-s} ) + \alpha_s \left( c( \bv , \obU^{n-s} , \obU^{n-s} ) - ( \bv,
+\bg(\theta_g) \bT^{n-s}) - \textcolor{red}{( \nabla \bv , \nu_t \nabla
+\obU^{n-s})} \right) \right] \nonumber \\ & - \nu \, a(\bv, \bU_0), \\
+   \label{eq:rhs2a} 
+   \left(S, Q^n \right) &\coloneqq -\sum_{s=1}^k \, \left[ \frac{\beta_s}{\dt}
+(S, T^{n-s}) + \alpha_s \left( c(S, \obU^{n-s}, \bT^{n-s}) -
+\textcolor{red}{(\nabla S, \frac{\nu_t}{\rm Pr_t} \nabla \bT^{n-s})} \right)
+\right] - \alpha \, a(S,T_0).
+\end{align}
+%
+Here, the $\beta_s$s and $\alpha_s$s are the respective $s$th-order BDF and
+extrapolation coefficients for the BDF$s$/EXT$s$ time-stepper
+\cite{fischer2017recent}.  Note that the right-hand side of (\ref{eq:var2a})
+will be zero if $\bu_0$ is divergence free or at least satisfies the weak
+divergence-free condition (\ref{eq:var2}).
+
+Under the assumption that  $\nabla \cdot \bU_0 = 0$, the compact matrix form
+\cite{maday1987well, maday1992pn, ronquist1987legendre} for
+(\ref{eq:var1a})--(\ref{eq:rhs2a}) is
+%
+\begin{align} \label{eq:stokes}
+   \left[ \begin{array}{cc} \bH & -\bD^T  \\[1.30ex] -\bD&  0
+   \end{array}\right] \, \left( \begin{array}{c} \bUu^n \\[1.30ex] \up^n
+   \end{array} \right) &= \left(\begin{array}{c}{\hat \buf(\obU^n,\bT^n;
+   \theta_g)} \\[1.30ex]0\end{array}\right), \\[2ex]
+   \label{eq:heat}
+   H_{\alpha} \, \uT^n &= {\hat \uQ(\obU^n,\bT^n)}.
+\end{align}
+%
+Here, $\bUu^n$, $\up^n$, and $\uT^n$ are the vectors of spectral element basis
+coefficients.  The corresponding block matrices are
+%
+\begin{equation}  \label{eq:mat1}
+   \bH = \left[ \begin{array}{cc} H_{\nu} & \\ & H_{\nu}
+   \end{array} \right], \hspace{.3in}
+   \bD = \left[ D_1 \;\; D_2 \right], \hspace{.3in}
+\end{equation}
+%
+with $H_{\nu} = \frac{\beta_0}{\dt} M + \nu A$ and $H_{\alpha} =
+\frac{\beta_0}{\dt} M + \alpha A$, with matrices $M$ and $A$ defined below.
+The velocity data vectors are ${\hat \buf(\obU^n,\bT^n; \theta_g)}= [{\hat
+\uf_1}\;{\hat \uf_2}]^T$, with
+%
+\begin{align} \label{eq:data1}
+   \hat \uf_m & \coloneqq - \sum_{s=1}^k \left[ \frac{\beta_s}{\dt} M
+\Uu_m^{n-s} + \alpha_s \left( C(\bUou^{n-s}) \Uou_m^{n-s} -
+\textcolor{red}{C_R(\edou)\Uou_m^{n-s}} - g_m M \ubT^{n-s} \right) \right]
+\nonumber \\ & - \nu A \Uu_{m,0}, \quad m=1,2.
+\end{align}
+%
+where $g_1 = \cos(\theta_g)$ and $g_2=\sin(\theta_g)$ represent
+the parametric forcing.  The thermal load in (\ref{eq:heat}) is
+%
+\begin{equation}
+   \hat \uQ(\bUou^n,\bT^n) \coloneqq - \sum_{s=1}^k \left[ \frac{\beta_s}{\dt}
+M \ubT^{n-s} + \alpha_s \left( C(\bUou^{n-s}) {\ubT}^{n-s} -
+\textcolor{red}{C_R(\frac{\edou}{\rm Pr_t})\ubT^{n-s}} \right) \right] - \alpha
+A \uT_0.
+\end{equation}
+%
+Entries of the respective stiffness, mass, convection, and
+gradient matrices are
+%
+\begin{align}
+   \label{eq:A} A_{ij} &= \int_{\Omega} \nabla \phi_i \nabla \phi_j\, d\bx,
+   \\
+   \label{eq:M} M_{ij} &= \int_{\Omega} \phi_i \phi_j\, d\bx, \\ 
+   \label{eq:C} C_{ij}(\bw) &= \int_{\Omega} \phi_i\cdot( \bw \cdot \nabla)
+   \phi_j \, d\bx, \\ 
+   \label{eq:D} D_{m,ij} &= \int_{\Omega} \psi_i \pp{\phi_j}{x_m} \,d\bx,
+   \quad m=1,2,\\
+   \label{eq:C_R} C_{R,ij}(w) &= \int_{\Omega} \nabla \phi_i w \nabla
+   \phi_j \, d\bx. 
+\end{align}
+%
+Note that $\{ \phi_i(\bx)\}$ forms the spectral element
+velocity/temperature basis while $\{ \psi_i(\bx)\}$ constitutes
+the pressure basis.
+
+\section{Galerkin Formulation for the Reduced-Order Model (ROM)}\label{galerkin_rom}
+\noindent Within the Galerkin framework of the preceding section it is
+relatively straightforward to develop a ROM.  One defines a set of functions
+$\bzeta_j(\bx) \in \bX^N \subset \bX^{\cN}$, $\theta_j(\bx) \in X^N \subset
+X^{\cN}$ such that the coarse-space (ROM) solution, is expressed as
+%
+\begin{equation} \label{eq:romu}
+   \bUou_\tc(\bx) = \sum_{j=0}^N \bzeta_j(\bx) U_{\tc,j}, \qquad
+   \bT_\tc(\bx) = \sum_{j=0}^N \theta_j(\bx) T_{\tc,j}.
+\end{equation}
+%
+For the ROM, we insert the expansions (\ref{eq:romu}) into
+(\ref{eq:var1})--(\ref{eq:var3}) and require equality for all $(\bv,S)$  in
+$\bZ_0^N$. In order to set the boundary conditions, we have augmented the trial
+(approximation) spaces $\bX^N$ and $X^N$ with the lifting function $\bzeta_0
+\coloneqq \bU_0$ and $\theta_0 \coloneqq T_0$.  The corresponding test spaces,
+$\bX_0^N \coloneqq \{\bzeta_j\}^N_{j=1}$ and $X_0^N \coloneqq
+\{\theta_j\}^N_{j=1}$, satisfying homogeneous boundary conditions, as is
+standard for Galerkin formulation.  The coarse space $\bZ_0^N :=
+(\bX_0^N,X_0^N)$ is typically based on a linear combination of full spectral
+element solutions of (\ref{eq:stokes})--(\ref{eq:heat}), such as snapshots at
+certain time-points, $t^n$, or solutions at various parametric values.  Under
+these conditions and with a carefully chosen $\bU_0$, $\bX^N$ is a set of
+velocity-space functions that are (weakly) divergence-free and the pressure
+terms drop out of (\ref{eq:var1})--(\ref{eq:var2}).  We also note that
+$\bzeta_j$ and $\theta_j$ are {\em modal}, not nodal, basis functions.  In this
+work, we consider proper-orthogonal decomposition (POD) to construct the
+reduced-basis.  The $N$-dimensional POD-space is the space that minimizes the
+averaged distance between the snapshot set and the $N$-dimensional subspace of
+the snapshots set in the $H^1$ semi-norm.  Further details of the POD basis
+selection are provided in \cite{kaneko2020towards} and references therein.
+
+The matrix form for the ROM is readily derived by constructing a
+pair of rectangular basis matrices, $\bB$ and $B$, having entries
+%
+\begin{equation}
+   \bB_{ij} = \bzeta_j(\bx_i), \qquad B_{ij} = \theta_j(\bx_i),\label{eq:bb}
+\end{equation}
+%
+where the $\bx_i$s are the spectral element nodal points.  The coarse-system
+matrices are $H_{\tc,\nu} = \bB^T \bH \bB$ and $H_{\tc,\alpha} = B^T H_{\alpha}
+B$ and the governing system for the ROM becomes
+%
+\begin{equation} \label{eq:rom}
+   H_{\tc,\nu}  \,{\huU_\tc}^n  = \bB^T \, {\hat \buf}(\bUou_\tc^n,\bT_\tc^n;
+   \theta_g), \qquad
+   H_{\tc,\alpha}\,{\huT_\tc}^n  =  B^T \, {\hat \uQ}(\bUou_\tc^n,\bT_\tc^n).
+\end{equation} 
+%
+We refer (\ref{eq:rom}) as Galerkin ROM (G-ROM) throughout the paper.  The ROM
+coefficient vectors, ${\huU}^n_\tc = [U^n_{\tc,1} \dots U^n_{\tc,N}]^T$,
+${\huT}^n_\tc = [T^n_{\tc,1} \dots T^n_{\tc,N}]^T$, are determined by solving
+the two $N \times N$ linear systems.  Note that the coefficients for the
+lifting functions are prescribed: $U_{\tc,0}=T_{\tc,0}=1$.  The initial
+coefficients for the ROM are obtained by projecting the initial condition
+onto the coarse space $\bZ_0^N$ with the $H^1$ semi-norm, 
+%
+\begin{equation} \label{eq:romu_intial}
+    \huU^0_\tc = \bB^T \bA \bUu^0, \qquad {\hat \uT}^0_\tc = B^T A \uT^0,
+\end{equation} 
+%
+which follows from the fact that the columns of $\bB$ and $B$ are,
+respectively, $\bA$- and $A$-orthonormal, where $\bA=$block-diagonal($A$).
+To recover the spectral element representation, we simply
+prolong the $N$-length vectors $\huU^n_\tc$ and ${\hat \uT}^n_\tc$ with the
+set of basis functions and add it with the lifting functions $\bu_0$ and $T_0$
+%
+\begin{equation} \label{eq:bv}
+   \bUou^n_\tc = \bB \huU^n_\tc + \bUu_0, \qquad \ubT^n_\tc =  B {\hat
+   \uT}^n_\tc + \uT_0.
+\end{equation}
+%
+The functional representations, $\bUou_\tc^n(\bx)$ and $\bT_\tc^n(\bx)$, are
+then obtained from (\ref{eq:ui})--(\ref{eq:ti}).  
+
+The equations for eddy viscosity $\nu_t$ is usually complicated, depending on
+several parameters and functions. We here avoid implementing the additional
+transport equations and just model the eddy viscosity.
+
+The idea is to expand the eddy viscosity $\nu_t$ as linear combination of POD
+basis $\{\xi_i\}$ associated with its snapshots.
+%
+\begin{equation}
+   \nu_t(\bx, t) \approx \sum^N_{i=0}l_i(t)\xi_i(\bx).
+\end{equation}
+%
+To model the eddy viscosity, the remaining question is how one solve for
+$\{l_i\}_i$ and there are several strategies:
+%
+\begin{enumerate} 
+   \item In \cite{lorenzi2016pod}, the author considered the coefficient
+$l_i(t)$ is same as the velocity.  
+   \item In \cite{georgaka2020hybrid, hijazi2020data}, the author considered the
+radial basis function \cite{lazzaro2002radial} to interpolate the time
+coefficient $l_i(t)$.
+\end{enumerate}
+%
+
+\subsection{Eddy Viscosity ROM}
+We first consider strategy~$1$ to compute the eddy viscosity, 
+%
+\begin{equation}
+   \nu_{\tt, \tc} = \sum^N_{i=0}U_i(t)\xi_i(\bx). \label{eq:eddy_exp}
+\end{equation}
+%
+With Eqs.(\ref{eq:romu}) and (\ref{eq:eddy_exp}), the trilinear term $(\nabla
+\bv, \nu_{\tt,\tc} \nabla \obU_c)$ can be expressed as:
+%
+\begin{equation} 
+   \left(\nabla \bv , \nu_{\tt,\tc} \nabla \obU_{\tc}\right) = \left(\nabla
+\bv, \sum^N_{k=0}U_k \xi_k(\bx) \nabla (\sum_{j=0}^N \bzeta_j(\bx) U_{\tc,j}) \right)
+= \sum^N_{k=0} \sum_{j=0}^N U_{\tc,k} U_{\tc,j} \left(\nabla \bv, \xi_k(\bx) \nabla
+\bzeta_j(\bx) \right)
+\end{equation}
+%

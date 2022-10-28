@@ -1,0 +1,710 @@
+\graphicspath{{/Users/bigticket0501/MOR_cases/trombe_wall/Pr_7.2/}}
+
+%% Pamaetric Problem %%
+\section{Ra Variation}
+We wish to estimate the solution to for $Ra \in \mathcal{P} =
+[\num{2e+05},~\num{7e+05}]$.
+\begin{figure}[h!]
+    \begin{minipage}[b]{.5\linewidth}
+   \centering 
+   \includegraphics[scale=0.5]{lift_0vel_cond/Ra_var/fom_snap/fom_temp}
+   \subcaption{Mean temperature field with $Ra$}
+    \end{minipage}%
+    \begin{minipage}[b]{.5\linewidth}
+   \centering 
+   \includegraphics[scale=0.5]{lift_0vel_cond/Ra_var/fom_snap/fom_vel}
+   \subcaption{Mean velocity field with $Ra$}
+    \end{minipage}%
+   \caption{FOM mean field averaging over $500$ CTUs with $Ra=2e5,~3e5,~4e5,~5e5,~6e5,~7e5$.}
+\label{fig:slot_pr_7.2_fom_mean} \end{figure}
+\subsection{FOM's Variability}
+\begin{figure}[h!]
+    \begin{minipage}[b]{.5\linewidth}
+   \centering 
+   \includegraphics[scale=0.5]{snapshots/mean_field/mean_ra2e5}
+   \subcaption{mean field at $Ra=\num{2e+05}$}
+    \end{minipage}%
+    \begin{minipage}[b]{.5\linewidth}
+   \includegraphics[scale=0.5]{snapshots/mean_field/mean_ra8e5}
+   \subcaption{mean field at $Ra=\num{8e+05}$}
+    \end{minipage}%
+   \caption{FOM mean field averaging over $500$ CTUs at different
+   time windows at $Ra=\num{2e+05}$ and $Ra=\num{8e+05}$.}
+\label{fig:slot_pr_7.2_fom_mean} \end{figure}
+\begin{figure}[h!]
+    \begin{minipage}[b]{.25\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{lift_0vel_cond/Ra_var/mnus_compare/mnus_compare}
+   \subcaption{Variability in mean Nu}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{lift_0vel_cond/Ra_var/mnus_compare/std_nus_compare}
+       \subcaption{Variability in std(Nu)}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{lift_0vel_cond/Ra_var/mtke_compare/tmtke_compare}
+       \subcaption{Variability in mean TKE}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{lift_0vel_cond/Ra_var/mtke_compare/tmtfluc_compare}
+       \subcaption{Variability in mean fluctuation in temperature}
+    \end{minipage}%
+   \caption{Slot problem at $\theta_g=90$ and $Pr=7.2$; Variability in QOIs.}
+\label{fig:slot_pr_7.2_fom_mean} \end{figure}
+\begin{figure}[h!]
+    \begin{minipage}[b]{.25\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{../Pr_0.71/ra_var/nu_1st2nd_compare/mnus_compare}
+   \subcaption{Variability in mean Nu}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{../Pr_0.71/ra_var/nu_1st2nd_compare/std_nus_compare}
+       \subcaption{Variability in std(Nu)}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{../Pr_0.71/ra_var/mtke_compare/tmtke_compare}
+       \subcaption{Variability in mean TKE}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{../Pr_0.71/ra_var/mtke_compare/tmtfluc_compare}
+       \subcaption{Variability in mean fluctuation in temperature}
+    \end{minipage}%
+   \caption{Slot problem at $\theta_g=90$ and $Pr=0.71$; Variability in QOIs.}
+\label{fig:slot_pr_7.2_fom_mean} \end{figure}
+
+Figs.\ref{fig:compare_hg_mnu_err}--\ref{fig:compare_hg_stdnu} shows the
+behavior of the relative error in the mean Nu and std(Nu) with Ra.  We observe
+that the maximum relative error in mean Nu is roughly $9\%$ after the fourth
+iteration in G-ROM, $4\%$ in L-ROM-DF and $8\%$ in P-ROM. In terms of std(Nu),
+we found L-ROM-DF and P-ROM is more accurate than G-ROM.
+\begin{figure}[h!]
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/Ra_var/parametric_ra2to7/hg_compare/rom_fldrelerr_2_4}
+        \subcaption{Relative $H^1$ error in the mean flow}\label{fig:compare_hg_mrelerr}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+       \centering \includegraphics[width=\linewidth]{lift_0vel_cond/Ra_var/parametric_ra2to7/hg_compare/nu_merr_2_4}
+        \subcaption{Predicted mean Nu}\label{fig:compare_hg_mnu_err}
+    \end{minipage}
+    \begin{minipage}[b]{.25\linewidth}
+       \centering \includegraphics[width=\linewidth]{lift_0vel_cond/Ra_var/parametric_ra2to7/hg_compare/nu_std_2_4}
+        \subcaption{Predicted std(Nu)}\label{fig:compare_hg_stdnu}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+       \centering \includegraphics[width=\linewidth]{lift_0vel_cond/Ra_var/parametric_ra2to7/hg_compare/mtke_2_4}
+        \subcaption{Predicted TKE}\label{fig:compare_hg_mtke}
+    \end{minipage} \caption{The parametric problem; performance of
+    POD-$h$Greedy with different stabilizations. \ref{fig:compare_hg_mrelerr},
+    \ref{fig:compare_hg_mnu_err}, \ref{fig:compare_hg_stdnu},
+    \ref{fig:compare_hg_mtke} presents the relative $H^1$ error in predicted
+    mean flow, relative error in mean Nu, std(Nu), mean TKE with $Ra \in
+    \mathcal{P}_{test}$ at 4th POD-$h$greedy iteration with G-ROM, P-ROM and
+    L-ROM-DF.} \label{fig:compare_hg} 
+\end{figure}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline & $Ra^*_{1},~N$ & $Ra^*_{2},~N$ & $Ra^*_{3},~N$ & $Ra^*_{4},~N$ \\
+\hline G-ROM   & $2e+05,~N=80$ & $7e+05,~N=100$ & $3e+05,~N=80$ & $4e+05,~N=80$ \\
+\hline  L-ROM-DF & $2e+05,~N=60$ & $7e+05,~N=100$ & $3e+05,~N=60$  & $4e+05,~N=80$ \\
+\hline  P-ROM & $2e+05,~N=60$ & $7e+05,~N=80$ & $3e+05,~N=80$ & $5e+05,~N=80$ \\
+\hline
+\end{tabular} 
+   \caption{List of anchor points selected by POD-$h$Greedy (Algorithm 1) and
+   $N$ with G-ROM, L-ROM-DF and P-ROM.} \label{tab:hg_anchors}
+\end{table}
+
+\begin{figure}[h!]
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/Ra_var/parametric_ra2to7/pg_compare/mrelerr_h1_3}
+        \subcaption{Relative $H^1$ error in the mean flow}
+        \label{fig:compare_pg_mrelerr_itr3}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/Ra_var/parametric_ra2to7/pg_compare/mnu_3}
+        \subcaption{Predicted mean Nu}
+        \label{fig:compare_pg_mnu_itr3}
+    \end{minipage}
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/Ra_var/parametric_ra2to7/pg_compare/mtfluc_3}
+        \subcaption{Predicted std(Nu)}
+        \label{fig:compare_pg_mtfluc_itr3}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/Ra_var/parametric_ra2to7/pg_compare/mtke_3}
+        \subcaption{Predicted TKE}
+        \label{fig:compare_pg_mtke_itr3}
+    \end{minipage} \caption{The parametric problem; performance of
+    POD-$p$Greedy with different stabilizations.
+    \ref{fig:compare_pg_mrelerr_itr3}, \ref{fig:compare_pg_mnu_itr3},
+    \ref{fig:compare_pg_mtfluc_itr3}, \ref{fig:compare_pg_mtke_itr3} presents
+    the relative $H^1$ error in predicted mean flow, predicted mean Nu, mean
+    fluctuation in temperature, mean TKE with $Ra \in \mathcal{P}_{test}$ at
+    3rd POD-$p$greedy iteration with G-ROM and L-ROM-DF.}
+    \label{fig:compare_pg_3rd} \end{figure}
+\clearpage
+
+\section{$\theta_g$ Variation}
+\subsection{Steady Slot Problem - $Ra=1e3,~Pr=7.2$}
+\begin{figure}[h!]
+    \begin{minipage}[b]{.5\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_1000/fom_snap/fom_temp}
+       \subcaption{Temperature with $\theta_g \in [0,~180]$.}
+    \end{minipage}%
+    \begin{minipage}[b]{.5\linewidth}
+   \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_1000/fom_snap/fom_vel}
+       \subcaption{Velocity with $\theta_g \in [0,~180]$.}
+    \end{minipage}%
+   \caption{FOM solution with $\theta_g \in [0,~180]$ at $Ra=1e3$ and $Pr=7.2$.}
+\label{fig:slot_pr_7.2_fom_sol} \end{figure}
+
+\begin{figure}[h!]
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_1000/pmor_theta0totheta180_0/hg_g-rom_off/offline_erri_L14}
+        \subcaption{Dual norm of the residual}\label{fig:hg_erri_ra1e3}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_1000/pmor_theta0totheta180_0/hg_g-rom_online/online_fldrelerr_L14_2}
+        \subcaption{Relative $H^1$ error in the solution}\label{fig:hg_fldrelerr_ra1e3}
+    \end{minipage}
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_1000/pmor_theta0totheta180_0/hg_g-rom_online/online_nus_L14_2}
+        \subcaption{Predicted Nu}\label{fig:hg_mean_ra1e3}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_1000/pmor_theta0totheta180_0/hg_g-rom_online/online_nusrelerr_L14_2}
+        \subcaption{Relative error in the Nu}\label{fig:hg_std_ra1e3}
+    \end{minipage} \caption{The parametric problem at $Ra=1e3,~Pr=7.2$ with
+    $\theta_g$ as parameter; performance of $h$-Greedy with G-ROM.
+    \ref{fig:hg_erri_ra1e3}, \ref{fig:hg_fldrelerr_ra1e3},
+    \ref{fig:hg_mean_ra1e3}, \ref{fig:hg_std_ra1e3} presents the dual
+    norm of the residual, relative $H^1$ error in predicted solution, predicted Nu and relative
+    error in the predicted Nu with $\theta_g \in [0,~180]$ at 14th $h$-greedy iteration.}
+    \label{fig:hg_online_ra1e3} 
+\end{figure}
+\begin{figure}[h!]
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_1000/pgreedy/offline/offline_erri_L6}
+        \subcaption{Dual norm of the residual}\label{fig:pg_erri_ra1e3}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_1000/pgreedy/online/online_fldrelerr_L6_2}
+        \subcaption{Relative $H^1$ error in the solution}\label{fig:pg_fldrelerr_ra1e3}
+    \end{minipage}
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_1000/pgreedy/online/online_nus_L6_2}
+        \subcaption{Predicted Nu}\label{fig:pg_mean_ra1e3}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_1000/pgreedy/online/online_nusrelerr_L6_2}
+        \subcaption{Relative error in the Nu}\label{fig:pg_std_ra1e3}
+    \end{minipage} \caption{The parametric problem at $Ra=1e3,~Pr=7.2$ with $\theta_g$ as
+    parameter; performance of $p$-Greedy with G-ROM.
+    \ref{fig:pg_erri_ra1e3}, \ref{fig:pg_fldrelerr_ra1e3},
+    \ref{fig:pg_mean_ra1e3}, \ref{fig:pg_std_ra1e3} presents the dual norm of the
+    residual, relative $H^1$ error in predicted solution, predicted Nu and
+    relative error in the predicted Nu with $\theta_g \in [0,~180]$ at 6th
+    $p$-greedy iteration.}
+    \label{fig:pg_online_ra1e3} 
+\end{figure}
+\clearpage
+\subsection{Unsteady Slot Problem - $Ra=1e4,~Pr=7.2$}
+\begin{figure}[h!]
+    \begin{minipage}[b]{.5\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_10000/fom_snap/fom_temp}
+       \subcaption{Temperature with $\theta_g \in [0,~180]$.}
+    \end{minipage}%
+    \begin{minipage}[b]{.5\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_10000/fom_snap/fom_vel}
+       \subcaption{Velocity with $\theta_g \in [0,~180]$.}
+    \end{minipage} \caption{FOM solution with $\theta_g \in [0,~180]$ at
+    $Ra=1e4$ and $Pr=7.2$. Solutions are all steady except at $\theta_g=30$.}
+\label{fig:slot_pr_7.2_fom_sol} \end{figure}
+\subsection{FOM's Variability}
+\begin{figure}[h!]
+    \begin{minipage}[b]{.25\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_10000/nu_1st2nd_compare/mnus_compare}
+   \subcaption{Variability in mean Nu}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_10000/nu_1st2nd_compare/std_nus_compare}
+       \subcaption{Variability in std(Nu)}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_10000/mtke_compare/tmtke_compare}
+       \subcaption{Variability in mean TKE}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_10000/mtke_compare/tmtfluc_compare}
+       \subcaption{Variability in mean fluctuation in temperature}
+    \end{minipage}%
+   \caption{Slot problem at $Ra=1e4$ and $Pr=7.2$; Variability in QOIs.}
+\label{fig:slot_pr_7.2_fom_mean} \end{figure}
+\begin{figure}[h!]
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_10000/pmor_ta0tota180/hg_g-rom_off/offline_erri_L6_}
+        \subcaption{Dual norm of the residual}\label{fig:erri_ra1e4}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_10000/pmor_ta0tota180/hg_g-rom_online/online_fldrelerr_L6_2}
+        \subcaption{Relative $H^1$ error in the mean flow}\label{fig:fldrelerr_ra1e4}
+    \end{minipage}
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_10000/pmor_ta0tota180/hg_g-rom_online/online_mean_L6_2}
+        \subcaption{Predicted Nu}\label{fig:mean_ra1e4}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_10000/pmor_ta0tota180/hg_g-rom_online/online_std_L6_2}
+        \subcaption{Predicted std(Nu)}
+        \label{fig:std_ra1e4}
+    \end{minipage} \caption{The parametric problem at $Ra=1e4,~Pr=7.2$ with $\theta_g$ as
+    parameter; performance of POD-$h$Greedy with G-ROM.
+    \ref{fig:erri_ra1e4}, \ref{fig:fldrelerr_ra1e4},
+    \ref{fig:mean_ra1e4}, \ref{fig:std_ra1e4} presents the dual
+    norm of the residual, relative $H^1$ error in predicted mean
+    flow, relative error in mean Nu, std(Nu), with $\theta_g \in
+    \mathcal{P}_{test}$ at 6th POD-$h$greedy iteration.}
+    \label{fig:online_ra1e4} 
+\end{figure}
+\clearpage
+\subsection{Unsteady Slot Problem - $Ra=8e4,~Pr=7.2$}
+\begin{figure}[h!]
+    \begin{minipage}[b]{.5\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_80000/fom_snap/fom_temp}
+       \subcaption{Temperature with $\theta_g \in [0,~180]$.}
+    \end{minipage}%
+    \begin{minipage}[b]{.5\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_80000/fom_snap/fom_vel}
+       \subcaption{Velocity with $\theta_g \in [0,~180]$.}
+    \end{minipage} 
+    \caption{FOM solution with $\theta_g \in [0,~180]$ at $Ra=8e4$ and
+    $Pr=7.2$. Solutions are unsteady at $\theta_g \in [0, 70]$ and steady at
+    $\theta_g \in [80, 180]$.}
+\label{fig:slot_pr_7.2_fom_sol} \end{figure}
+\subsection{FOM's Variability}
+\begin{figure}[h!]
+    \begin{minipage}[b]{.25\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_80000/nu_1st2nd_compare/mnus_compare}
+   \subcaption{Variability in mean Nu}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_80000/nu_1st2nd_compare/std_nus_compare}
+       \subcaption{Variability in std(Nu)}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_80000/mtke_compare/tmtke_compare}
+       \subcaption{Variability in mean TKE}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_80000/mtke_compare/tmtfluc_compare}
+       \subcaption{Variability in mean fluctuation in temperature}
+    \end{minipage}%
+   \caption{Slot problem at $Ra=8e4$ and $Pr=7.2$; Variability in QOIs.}
+\label{fig:slot_pr_7.2_fom_mean} \end{figure}
+\begin{figure}[h!]
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_80000/pmor_ta0tota180/hg_g-rom_off/offline_erri_L6_}
+        \subcaption{Dual norm of the residual}
+        \label{fig:erri_ra8e4_grom}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_80000/pmor_ta0tota180/hg_g-rom_online/online_fldrelerr_L6_2}
+        \subcaption{Relative $H^1$ error in the mean flow}
+        \label{fig:fldrelerr_ra8e4_grom}
+    \end{minipage}
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_80000/pmor_ta0tota180/hg_g-rom_online/online_mean_L6_2}
+        \subcaption{Predicted mean Nu}
+        \label{fig:mean_ra8e4_grom}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_80000/pmor_ta0tota180/hg_g-rom_online/online_std_L6_2}
+        \subcaption{Predicted std(Nu)}
+        \label{fig:std_ra8e4_grom}
+    \end{minipage} 
+    \caption{The parametric problem at $Ra=8e4,~Pr=7.2$ with $\theta_g$ as
+    parameter; performance of POD-$h$Greedy with \textbf{G-ROM}.  \ref{fig:erri_ra8e4_grom},
+    \ref{fig:fldrelerr_ra8e4_grom}, \ref{fig:mean_ra8e4_grom}, \ref{fig:std_ra8e4_grom}
+    presents the dual norm of the residual, relative $H^1$ error in predicted
+    mean flow, relative error in mean Nu, std(Nu), with $\theta_g \in
+    \mathcal{P}_{test}$ at \textbf{6th} POD-$h$greedy iteration.}
+    \label{fig:online_ra8e4_grom} 
+\end{figure}
+
+\begin{figure}[h!]
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_80000/pmor_ta0tota180/hg_l-rom-df_off/offline_erri_L7_}
+        \subcaption{Dual norm of the residual}
+        \label{fig:erri_ra8e4_lromdf}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_80000/pmor_ta0tota180/hg_l-rom-df_online/online_fldrelerr_L7_2}
+        \subcaption{Relative $H^1$ error in the mean flow}
+        \label{fig:fldrelerr_ra8e4_lromdf}
+    \end{minipage}
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_80000/pmor_ta0tota180/hg_l-rom-df_online/online_mean_L7_2}
+        \subcaption{Predicted mean Nu}
+        \label{fig:mean_ra8e4_lromdf}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_80000/pmor_ta0tota180/hg_l-rom-df_online/online_std_L7_2}
+        \subcaption{Predicted Std(Nu)}\label{fig:std_ra8e4_lromdf}
+    \end{minipage} 
+    \caption{The parametric problem at $Ra=8e4,~Pr=7.2$ with $\theta_g$ as
+    parameter; performance of POD-$h$Greedy with \textbf{L-ROM-DF}.  \ref{fig:erri_ra8e4_lromdf},
+    \ref{fig:fldrelerr_ra8e4_lromdf}, \ref{fig:mean_ra8e4_lromdf}, \ref{fig:std_ra8e4_lromdf}
+    presents the dual norm of the residual, relative $H^1$ error in predicted
+    mean flow, relative error in mean Nu, std(Nu), with $\theta_g \in
+    \mathcal{P}_{test}$ at \textbf{7th} POD-$h$greedy iteration.}
+    \label{fig:online_ra8e4_lromdf} 
+\end{figure}
+\clearpage
+\subsection{Unsteady Slot Problem - $Ra=3e5,~Pr=7.2$}
+\begin{figure}[h!]
+    \begin{minipage}[b]{.5\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/fom_snap/fom_temp}
+       \subcaption{Temperature with $\theta_g \in [0,~180]$.}
+    \end{minipage}%
+    \begin{minipage}[b]{.5\linewidth}
+   \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/fom_snap/fom_vel}
+       \subcaption{Velocity with $\theta_g \in [0,~180]$.}
+    \end{minipage} \caption{FOM solution with $\theta_g \in [0,~180]$ at
+    $Ra=3e5$ and $Pr=7.2$. Solutions are unsteady at $\theta_g \in [0, 120]$ and
+    steady at $\theta_g \in [130, 180]$.}
+\label{fig:slot_pr_7.2_fom_sol} \end{figure}
+\subsection{FOM's Variability}
+\begin{figure}[h!]
+    \begin{minipage}[b]{.25\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/nu_1st2nd_compare/mnus_compare}
+   \subcaption{Variability in mean Nu}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/nu_1st2nd_compare/std_nus_compare}
+       \subcaption{Variability in std(Nu)}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/mtke_compare/tmtke_compare}
+       \subcaption{Variability in mean TKE}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/mtke_compare/tmtfluc_compare}
+       \subcaption{Variability in mean fluctuation in temperature}
+    \end{minipage}%
+   \caption{Slot problem at $Ra=3e5$ and $Pr=7.2$; Variability in QOIs.}
+\label{fig:slot_pr_7.2_fom_mean} \end{figure}
+\begin{figure}[h!]
+    \begin{minipage}[b]{.25\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{../Pr_0.71/theta_var/nu_1st2nd_compare/mnus_compare}
+   \subcaption{Variability in mean Nu}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{../Pr_0.71/theta_var/nu_1st2nd_compare/std_nus_compare}
+       \subcaption{Variability in std(Nu)}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{../Pr_0.71/theta_var/mtke_compare/tmtke_compare}
+       \subcaption{Variability in mean TKE}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+   \centering 
+   \includegraphics[width=\linewidth]{../Pr_0.71/theta_var/mtke_compare/tmtfluc_compare}
+       \subcaption{Variability in mean fluctuation in temperature}
+    \end{minipage}%
+   \caption{Slot problem at $Ra=1e4$ and $Pr=7.2$; Variability in QOIs.}
+\label{fig:slot_pr_7.2_fom_mean} \end{figure}
+\begin{figure}[h!]
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta90to180/hg_g-rom_off/offline_erri_L6_}
+        \subcaption{Dual norm of the residual}
+        \label{fig:erri_ra3e5_t90to180}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta90to180/hg_g-rom_online/online_fldrelerr_L6_2}
+        \subcaption{Relative $H^1$ error in the mean flow}
+        \label{fig:fldrelerr_ra3e5_t90to180}
+    \end{minipage}
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta90to180/hg_g-rom_online/online_mean_L6_2}
+        \subcaption{Predicted Mean Nu}
+        \label{fig:mean_ra3e5_t90to180}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta90to180/hg_g-rom_online/online_std_L6_2}
+        \subcaption{Predicted Std(Nu)}
+        \label{fig:std_ra3e5_t90to180}
+    \end{minipage} 
+    \caption{The parametric problem at $Ra=3e5,~Pr=7.2$ with $\theta_g$ as
+    parameter; performance of POD-$h$Greedy with \textbf{G-ROM}.  \ref{fig:erri_ra3e5_t90to180},
+    \ref{fig:fldrelerr_ra3e5_t90to180}, \ref{fig:mean_ra3e5_t90to180}, \ref{fig:std_ra3e5_t90to180}
+    presents the dual norm of the residual, relative $H^1$ error in predicted
+    mean flow, relative error in mean Nu, std(Nu), with $\theta_g \in
+    \textbf{[90,~180]}$ at \textbf{6th} POD-$h$greedy iteration.}
+    \label{fig:online_ra3e5_t90to180} 
+\end{figure}
+
+\begin{figure}[h!]
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta60to180/hg_g-rom_off/offline_erri_L5_}
+        \subcaption{Dual norm of the residual}
+        \label{fig:erri_ra3e5_t60to180}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta60to180/hg_g-rom_online/online_fldrelerr_L5_2}
+        \subcaption{Relative $H^1$ error in the mean flow}
+        \label{fig:fldrelerr_ra3e5_t60to180}
+    \end{minipage}
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta60to180/hg_g-rom_online/online_mean_L5_2}
+        \subcaption{Predicted Mean Nu}
+        \label{fig:mean_ra3e5_t60to180}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta60to180/hg_g-rom_online/online_std_L5_2}
+        \subcaption{Predicted Std(Nu)}
+        \label{fig:std_ra3e5_t60to180}
+    \end{minipage} 
+    \caption{The parametric problem at $Ra=3e5,~Pr=7.2$ with $\theta_g$ as
+    parameter; performance of POD-$h$Greedy with \textbf{G-ROM}.  \ref{fig:erri_ra3e5_t60to180},
+    \ref{fig:fldrelerr_ra3e5_t60to180}, \ref{fig:mean_ra3e5_t60to180}, \ref{fig:std_ra3e5_t60to180}
+    presents the dual norm of the residual, relative $H^1$ error in predicted
+    mean flow, relative error in mean Nu, std(Nu), with $\theta_g \in
+    \textbf{[60,~180]}$ at \textbf{5th} POD-$h$greedy iteration.}
+    \label{fig:online_ra3e5_t60to180} 
+\end{figure}
+
+\begin{figure}[h!]
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta40to180/hg_g-rom_off/offline_erri_L6_}
+        \subcaption{Dual norm of the residual}
+        \label{fig:erri_ra3e5_t40to180_grom}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta40to180/hg_g-rom_online/online_fldrelerr_L6_2}
+        \subcaption{Relative $H^1$ error in the mean flow}
+        \label{fig:fldrelerr_ra3e5_t40to180_grom}
+    \end{minipage}
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta40to180/hg_g-rom_online/online_mean_L6_2}
+        \subcaption{Predicted Mean Nu}
+        \label{fig:mean_ra3e5_t40to180_grom}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta40to180/hg_g-rom_online/online_std_L6_2}
+        \subcaption{Predicted Std(Nu)}
+        \label{fig:std_ra3e5_t40to180_grom}
+    \end{minipage} 
+    \caption{The parametric problem at $Ra=3e5,~Pr=7.2$ with $\theta_g$ as
+    parameter; performance of POD-$h$Greedy with \textbf{G-ROM}.  \ref{fig:erri_ra3e5_t40to180_grom},
+    \ref{fig:fldrelerr_ra3e5_t40to180_grom}, \ref{fig:mean_ra3e5_t40to180_grom}, \ref{fig:std_ra3e5_t40to180_grom}
+    presents the dual norm of the residual, relative $H^1$ error in predicted
+    mean flow, relative error in mean Nu, std(Nu), with $\theta_g \in
+    \textbf{[40,~180]}$ at \textbf{6th} POD-$h$greedy iteration.}
+    \label{fig:online_ra3e5_t40to180_grom} 
+\end{figure}
+
+\begin{figure}[h!]
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta40to180/hg_c-rom_off/offline_erri_L6_}
+        \subcaption{Dual norm of the residual}
+        \label{fig:erri_ra3e5_t40to180_crom}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta40to180/hg_c-rom_online/online_fldrelerr_L6_2}
+        \subcaption{Relative $H^1$ error in the mean flow}
+        \label{fig:fldrelerr_ra3e5_t40to180_crom}
+    \end{minipage}
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta40to180/hg_c-rom_online/online_mean_L6_2}
+        \subcaption{Predicted Mean Nu}
+        \label{fig:mean_ra3e5_t40to180_crom}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta40to180/hg_c-rom_online/online_std_L6_2}
+        \subcaption{Predicted Std(Nu)}
+        \label{fig:std_ra3e5_t40to180_crom}
+    \end{minipage} 
+    \caption{The parametric problem at $Ra=3e5,~Pr=7.2$ with $\theta_g$ as
+    parameter; performance of POD-$h$Greedy with \textbf{C-ROM}.  \ref{fig:erri_ra3e5_t40to180_crom},
+    \ref{fig:fldrelerr_ra3e5_t40to180_crom}, \ref{fig:mean_ra3e5_t40to180_crom}, \ref{fig:std_ra3e5_t40to180_crom}
+    presents the dual norm of the residual, relative $H^1$ error in predicted
+    mean flow, relative error in mean Nu, std(Nu), with $\theta_g \in
+    \textbf{[40,~180]}$ at \textbf{6th} POD-$h$greedy iteration.}
+    \label{fig:online_ra3e5_t40to180_crom} 
+\end{figure}
+
+\begin{figure}[h!]
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta40to180/hg_l-rom-df_off/offline_erri_L6_}
+        \subcaption{Dual norm of the residual}
+        \label{fig:erri_ra3e5_t40to180_lromdf}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta40to180/hg_l-rom-df_online/online_fldrelerr_L6_2}
+        \subcaption{Relative $H^1$ error in the mean flow}
+        \label{fig:fldrelerr_ra3e5_t40to180_lromdf}
+    \end{minipage}
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta40to180/hg_l-rom-df_online/online_mean_L6_2}
+        \subcaption{Predicted Mean Nu}
+        \label{fig:mean_ra3e5_t40to180_lromdf}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta40to180/hg_l-rom-df_online/online_std_L6_2}
+        \subcaption{Predicted Std(Nu)}
+        \label{fig:std_ra3e5_t40to180_lromdf}
+    \end{minipage} 
+    \caption{The parametric problem at $Ra=3e5,~Pr=7.2$ with $\theta_g$ as
+    parameter; performance of POD-$h$Greedy with \textbf{L-ROM-DF}.  \ref{fig:erri_ra3e5_t40to180_lromdf},
+    \ref{fig:fldrelerr_ra3e5_t40to180_lromdf}, \ref{fig:mean_ra3e5_t40to180_lromdf}, \ref{fig:std_ra3e5_t40to180_lromdf}
+    presents the dual norm of the residual, relative $H^1$ error in predicted
+    mean flow, relative error in mean Nu, std(Nu), with $\theta_g \in
+    \textbf{[40,~180]}$ at \textbf{6th} POD-$h$greedy iteration.}
+    \label{fig:online_ra3e5_t40to180_lromdf} 
+\end{figure}
+
+\begin{figure}[h!]
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta20to180/hg_g-rom_off/offline_erri_L8_}
+        \subcaption{Dual norm of the residual}
+        \label{fig:erri_ra3e5_t20to180_grom}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta20to180/hg_g-rom_online/online_fldrelerr_L8_2}
+        \subcaption{Relative $H^1$ error in the mean flow}
+        \label{fig:fldrelerr_ra3e5_t20to180_grom}
+    \end{minipage}
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta20to180/hg_g-rom_online/online_mean_L8_2}
+        \subcaption{Predicted Mean Nu}
+        \label{fig:mean_ra3e5_t20to180_grom}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta20to180/hg_g-rom_online/online_std_L8_2}
+        \subcaption{Predicted Std(Nu)}
+        \label{fig:std_ra3e5_t20to180_grom}
+    \end{minipage} 
+    \caption{The parametric problem at $Ra=3e5,~Pr=7.2$ with $\theta_g$ as
+    parameter; performance of POD-$h$Greedy with \textbf{G-ROM}.  \ref{fig:erri_ra3e5_t20to180_grom},
+    \ref{fig:fldrelerr_ra3e5_t20to180_grom}, \ref{fig:mean_ra3e5_t20to180_grom}, \ref{fig:std_ra3e5_t20to180_grom}
+    presents the dual norm of the residual, relative $H^1$ error in predicted
+    mean flow, relative error in mean Nu, std(Nu), with $\theta_g \in
+    \textbf{[20,~180]}$ at \textbf{8th} POD-$h$greedy iteration.}
+    \label{fig:online_ra3e5_t20to180_grom} 
+\end{figure}
+\begin{figure}[h!]
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta20to180/hg_c-rom_off/offline_erri_L8_}
+        \subcaption{Dual norm of the residual}
+        \label{fig:erri_ra3e5_t20to180_crom}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta20to180/hg_c-rom_online/online_fldrelerr_L8_2}
+        \subcaption{Relative $H^1$ error in the mean flow}
+        \label{fig:fldrelerr_ra3e5_t20to180_crom}
+    \end{minipage}
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta20to180/hg_c-rom_online/online_mean_L8_2}
+        \subcaption{Predicted Mean Nu}
+        \label{fig:mean_ra3e5_t20to180_crom}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta20to180/hg_c-rom_online/online_std_L8_2}
+        \subcaption{Predicted Std(Nu)}
+        \label{fig:std_ra3e5_t20to180_crom}
+    \end{minipage} 
+    \caption{The parametric problem at $Ra=3e5,~Pr=7.2$ with $\theta_g$ as
+    parameter; performance of POD-$h$Greedy with \textbf{C-ROM}.  \ref{fig:erri_ra3e5_t20to180_crom},
+    \ref{fig:fldrelerr_ra3e5_t20to180_crom}, \ref{fig:mean_ra3e5_t20to180_crom}, \ref{fig:std_ra3e5_t20to180_crom}
+    presents the dual norm of the residual, relative $H^1$ error in predicted
+    mean flow, relative error in mean Nu, std(Nu), with $\theta_g \in
+    \textbf{[20,~180]}$ at \textbf{8th} POD-$h$greedy iteration.}
+    \label{fig:online_ra3e5_t20to180_crom} 
+\end{figure}
+\begin{figure}[h!]
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta20to180/hg_l-rom-df_off/offline_erri_L6_}
+        \subcaption{Dual norm of the residual}
+        \label{fig:erri_ra3e5_t20to180_lromdf}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta20to180/hg_l-rom-df_online/online_fldrelerr_L6_2}
+        \subcaption{Relative $H^1$ error in the mean flow}
+        \label{fig:fldrelerr_ra3e5_t20to180_lromdf}
+    \end{minipage}
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta20to180/hg_l-rom-df_online/online_mean_L6_2}
+        \subcaption{Predicted Mean Nu}
+        \label{fig:mean_ra3e5_t20to180_lromdf}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta20to180/hg_l-rom-df_online/online_std_L6_2}
+        \subcaption{Predicted Std(Nu)}
+        \label{fig:std_ra3e5_t20to180_lromdf}
+    \end{minipage} 
+    \caption{The parametric problem at $Ra=3e5,~Pr=7.2$ with $\theta_g$ as
+    parameter; performance of POD-$h$Greedy with \textbf{L-ROM-DF}.  \ref{fig:erri_ra3e5_t20to180_lromdf},
+    \ref{fig:fldrelerr_ra3e5_t20to180_lromdf}, \ref{fig:mean_ra3e5_t20to180_lromdf}, \ref{fig:std_ra3e5_t20to180_lromdf}
+    presents the dual norm of the residual, relative $H^1$ error in predicted
+    mean flow, relative error in mean Nu, std(Nu), with $\theta_g \in
+    \textbf{[20,~180]}$ at \textbf{6th} POD-$h$greedy iteration.}
+    \label{fig:online_ra3e5_t20to180_lromdf} 
+\end{figure}
+
+\begin{figure}[h!]
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta0to180/hg_l-rom-df_off/offline_erri_L6_}
+        \subcaption{Dual norm of the residual}
+        \label{fig:erri_ra3e5_t0to180}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta0to180/hg_l-rom-df_online/online_fldrelerr_L6_2}
+        \subcaption{Relative $H^1$ error in the mean flow}
+        \label{fig:fldrelerr_ra3e5_t0to180}
+    \end{minipage}
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta0to180/hg_l-rom-df_online/online_mean_L6_2}
+        \subcaption{Predicted Mean Nu}
+        \label{fig:mean_ra3e5_t0to180}
+    \end{minipage}%
+    \begin{minipage}[b]{.25\linewidth}
+        \centering \includegraphics[width=\linewidth]{lift_0vel_cond/theta_var/Ra_300000/pmor_theta0to180/hg_l-rom-df_online/online_std_L6_2}
+        \subcaption{Predicted Std(Nu)}
+        \label{fig:std_ra3e5_t0to180}
+    \end{minipage} 
+    \caption{The parametric problem at $Ra=3e5,~Pr=7.2$ with $\theta_g$ as
+    parameter; performance of POD-$h$Greedy with \textbf{L-ROM-DF}.  \ref{fig:erri_ra3e5_t0to180},
+    \ref{fig:fldrelerr_ra3e5_t0to180}, \ref{fig:mean_ra3e5_t0to180}, \ref{fig:std_ra3e5_t0to180}
+    presents the dual norm of the residual, relative $H^1$ error in predicted
+    mean flow, relative error in mean Nu, std(Nu), with $\theta_g \in
+    \textbf{[0,~180]}$ at \textbf{6th} POD-$h$greedy iteration.}
+    \label{fig:online_ra3e5_t0to180} 
+\end{figure}

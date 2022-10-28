@@ -1,0 +1,172 @@
+\section{Quick Start} \subsection{Prerequisite} NekMOR requires Nek5000
+\cite{fischer2008nek5000}.  For installation, one could consult
+\url{http://nek5000.github.io/NekDoc/quickstart.html}
+
+\subsection{Download and Setup} This chapter is to provide a quick overview for
+user on how to setup and run the basic case using NekMOR. The source is
+maintained in a github repository and can be downloaded with the git command:
+\begin{lstlisting}[language=bash] $ git clone
+https://github.com/SEAL-UIUC/NekMOR.git \end{lstlisting} 
+After downloading, add the path of the NekMOR directory and list targeted
+objective files to .bashrc (or .bash\_profile):
+\begin{lstlisting}[language=bash] 
+$ export MOR_DIR='the_path_of_the_NekMOR_directory' 
+$ export USR='aux.o ana.o conv.o
+const.o dump.o ei.o lapack.o legacy.o mpar.o pod.o filter.o qoi.o rom.o read.o
+rk.o time.o unit.o tensor.o riesz.o' 
+$ source ~/.bashrc 
+\end{lstlisting}
+
+\subsection{A Working Example} 
+As a first example, we consider the problem of 2D
+flow past a cylinder. This is a canonical test case for ROMs because of its
+robust and low-dimensional attractor, which is manifest as a von Karman vortex
+street for $\rm Re = UD/\nu >34.37$ \cite{2021APS..DFDP08001D}. The Reynolds
+number in our test case $\rm Re = 100$ and domain is $\Omega = [-2.5 : 17]D
+\times [-5 : 5]D$, with the unit-diameter cylinder centered at $[0, 0]$.
+
+To get started, we first download NekMOR examples to the home directory:
+\begin{lstlisting}[language=bash]
+$ cd 
+$ git clone https://github.com/Ping-Hsuan/NekMOR_Examples.git
+\end{lstlisting}
+Go to the cyl directory, setup NekMOR and compile:
+\begin{lstlisting}[language=bash]
+$ cd NekMOR_Examples/cyl
+$ genmap # run partioner, on input type cyl
+$ $MOR_DIR/bin/linkm
+$ makenek cyl
+\end{lstlisting}
+
+To get the snapshot for the cylinder case, one could either use Nek5000 to
+collect the snapshots, or download the precomputed snapshots. Assuming you are
+in the cyl directory, run the following command to download the stored
+snapshots: 
+\begin{lstlisting}[language=bash] 
+$ $MOR_DIR/bin/gsnaps cyl_rect_full 
+\end{lstlisting}
+This will create a directory data under NekMOR which has the precomputed
+snapshot. 
+
+Create a list with path of snapshots:
+\begin{lstlisting}[language=bash] i
+$ ls $MOR_DIR/data/cyl_rect/cyl0.f0* > file.list
+\end{lstlisting}
+Create a list with path of fom mean fields for comparing against the
+approximated solution:
+\begin{lstlisting}[language=bash] i
+$ ls $MOR_DIR/data/cyl_rect/avgcyl0.f0*{05,06,07,08,09,10} > fom_avg.list
+\end{lstlisting} 
+To use the FOM solution at $t=500$ as the initial condition, add
+the path of \textit{cyl0.f00500} below PRESOLVE section in cyl.rea:
+\begin{lstlisting}[language=bash] i
+$ sed "/PRESOLVE/{n;s|.*|${MOR_DIR}\/data\/cyl_rect\/cyl0.f00500|}" cyl.rea
+\end{lstlisting}
+Run NekMOR:
+\begin{lstlisting}[language=bash] 
+$ nekbmpi cyl 1 # run NekMOR on 1 ranks in the background 
+$ tail logfile  # view solver output 
+\end{lstlisting}
+
+\subsection{Viewing the first 2D example}
+We use VisIt for data visualization. Assuming that the Nek5000/bin is in the
+execution path,  
+\begin{itemize}
+   \item Run \textit{visnek romcyl} to view the ROM solution.
+   \item Run \textit{visnek bascyl} to view the POD basis.
+   \item Run \textit{visnek uiccyl} to view the initial condition, where
+      uiccyl0.f00001 being the FOM solution, uiccyl0.f00002 being the projected
+      solution, and uiccyl0.f00003 being the error between the two.
+   \item Run \textit{visnek lapcyl} to view the laplacian of velocity POD
+      basis. This field is only computed in flow pass a cylinder case. It is
+      used to compute the drag coefficients.
+\end{itemize}
+
+\subsection{Getting the drag coefficients}
+To get the drag associated with ROM solution on the cylinder, one simply run
+\begin{lstlisting}[language=bash] 
+$ grep 'drag' logfile
+\end{lstlisting}
+which will produce lines such as
+\begin{lstlisting}[language=bash] 
+5.00000000E+02  2.08581895E-01  6.45283485E-01  8.53865380E-01  dragx
+5.00000000E+02  1.91399328E-02  4.07880767E-02  5.99280094E-02  dragy
+\end{lstlisting}
+indicating, respectively, the physical time, the viscous drag, the pressure
+drag and the total drag.
+
+\subsection{Getting the relative error in mean field}
+To get the relative error in the mean field, one simply run
+\begin{lstlisting}[language=bash] 
+$ grep 'relative h1  error' logfile
+\end{lstlisting}
+which will produce lines such as
+\begin{lstlisting}[language=bash] 
+ relative h1  error:   3.4366084959588877E-006
+ relative h1  error:   1.9777249379045290E-006
+\end{lstlisting}
+indicating, respectively, the error in the approximated mean flield and the
+error in the project mena field.
+
+\section{Parameters file} NekMOR in general supports two types of parameters
+files, .rea and .mpar. But .rea will not have all the new features due to the
+limitations in number of parameters and potential conflicts with Nek5000.
+\subsection{.rea}
+\subsection{.mpar} The keys are grouped in different sections
+and a specific value is assigned to each key. The .par file follows the
+structure exemplified below.  
+\begin{lstlisting}[mathescape] 
+[SECTION]
+key = value
+$\cdots$
+[SECTION]
+key = value
+$\cdots$ 
+\end{lstlisting}
+
+The sections are: 
+\begin{enumerate} \item GENERAL \item POD \item QOI \item
+COPT \item FAST \item Buoyancy \item FORCING \item FILTER \item EI \item TENDEC
+\end{enumerate}
+
+\begin{table}[!h] \caption{GENERAL key in the .mpar file} \centering
+   \begin{tabular}{|c|c|c|} \hline \multicolumn{1}{|c|}{Key} & Value(s) &
+      Descripton \\ \hline mode                      &
+      \makecell{ALL\\OFF\\ON\\ONB\\AEQ}      & \makecell[l]{MOR mode: \\
+   \begin{minipage}{4in} \vskip 4pt \begin{enumerate} \item ALL: \textbf{Build}
+         the ROM operator and \textbf{run} the ROM.  \item OFF: \textbf{Build}
+            the ROM operator only.  \item ON: \textbf{Run} the ROM with
+   operator only.  \item ONB: \textbf{Run} the ROM with reduced basis at hand.
+   \item AEQ: \end{enumerate} \vskip 4pt \end{minipage}}  \\ \hline field
+      & \makecell{VT\\V\\T}    &  Fields to be solved  \\ \hline nb
+      &  $<$int$>$       & Number of modes for the ROM      \\ \hline ns
+      &  $<$int$>$       & Number of snapshots used for POD \\ \hline nskip
+      &  $<$int$>$       & Skipping interval in snapshots   \\ \hline avginit
+      &  $<$int$>$       & Starting time-step of ROM averaging \\ \hline rktol
+      &  $<$real$>$      & Adaptive Runge-Kutta error tolerance \\ \hline
+      tneubc                    &  \makecell{(no)\\yes}        &  Inhomogeneous
+      Neumann BC for temperature          \\ \hline nplay                     &
+      $<$int$>$       & Number of replay modes           \\ \hline decoupled
+      &  \makecell{(no)\\yes}        &            \\ \hline cflow
+   &  \makecell{(no)\\yes}        &            \\ \hline \end{tabular}
+\end{table}
+
+\begin{table}[!h] \caption{POD key in the .mpar file} \centering
+   \begin{tabular}{|c|c|c|} \hline \multicolumn{1}{|c|}{Key} & Value(s) &
+Descripton \\ \hline type & \makecell{(L2)\\H10\\HLM}      & POD-inner
+product \\ \hline
+mode0                     & \makecell{AVG\\(STATE)}    &  Zeroth mode type\\ \hline
+combined                  & \makecell{(no)\\yes}    &  Combine velocity and temperature POD modeds\\ \hline
+ratio                     &  $<$real$>$       & Gramian ratio \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[!h] \caption{QOI key in the .mpar file} \centering
+   \begin{tabular}{|c|c|c|} \hline \multicolumn{1}{|c|}{Key} & Value(s) &
+Descripton \\ \hline
+freq & $<$real$>$      & Frequency of qoi dump ($<1 \rightarrow$ iostep) \\ \hline
+tke  & \makecell{(no)\\yes}    & Turbulence kinetic energy \\ \hline
+drag & \makecell{(no)\\yes}      & Drag based on OBJ data \\ \hline
+nu   & $<$int$>$       & Nusselt number based on problem type (1-3) \\ \hline
+\end{tabular}
+\end{table}

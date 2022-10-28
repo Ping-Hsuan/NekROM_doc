@@ -1,0 +1,31 @@
+\begin{thebibliography}{1}
+
+\bibitem{kaneko2022augmented}
+Kento Kaneko and Paul Fischer.
+\newblock Augmented reduced order models for turbulence.
+\newblock {\em Frontiers in Physics}, page 808, 2022.
+
+\bibitem{kaneko2020towards}
+Kento Kaneko, Ping-Hsuan Tsai, and Paul Fischer.
+\newblock Towards model order reduction for fluid-thermal analysis.
+\newblock {\em Nuclear Engineering and Design}, 370:110866, 2020.
+
+\bibitem{tsai2022parametric}
+Ping-Hsuan Tsai and Paul Fischer.
+\newblock Parametric model-order-reduction development for unsteady convection.
+\newblock {\em Frontiers in Physics}, page 711, 2022.
+
+\bibitem{ding2021flow}
+Ke~Ding and Arne Pearlstein.
+\newblock Flow past a linearly-sprung, freely-rotatable circular cylinder with
+  an eccentric center of mass.
+\newblock In {\em APS Division of Fluid Dynamics Meeting Abstracts}, pages
+  P08--001, 2021.
+
+\bibitem{fischer2008nek5000}
+P~Fischer, J~Kruse, J~Mullen, H~Tufo, J~Lottes, and S~Kerkemeier.
+\newblock Nek5000: Open source spectral element cfd solver.
+\newblock {\em Argonne National Laboratory, Mathematics and Computer Science
+  Division, Argonne, IL, see https://nek5000.mcs.anl.gov}, 2008.
+
+\end{thebibliography}
